@@ -1,0 +1,19 @@
+/* src/css/KakaoLogin.css */
+button.kakao-icon-btn {
+  /* 브라우저 기본 버튼 스타일 제거 */
+  all: unset;
+
+  display: inline-block;
+  width: 44px;          /* 원하는 크기(36/40/48 등) */
+  height: 44px;
+  cursor: pointer;
+
+  /* CSS 파일 기준 상대경로! (src/css -> src/assets) */
+  background: url("../assets/kakaotalk-seeklogo.png")
+              center / 100% 100% no-repeat;
+}
+
+button.kakao-icon-btn:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
