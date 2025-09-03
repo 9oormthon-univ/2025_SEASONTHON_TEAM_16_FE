@@ -2,15 +2,11 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Redirection from "./modules/Redirection";
 import KakaoLogin from "./utils/KakaoLogin";
+import Signup from "./pages/Signup";
 
 export default function App() {
   return (
     <BrowserRouter>
-      {/* 네비게이션 메뉴 */}
-      <nav style={{ padding: 16, background: "#eee", display: "flex", gap: 12 }}>
-        <Link to="/login">로그인</Link>
-      </nav>
-
       {/* 라우팅 설정 */}
       <Routes>
         <Route
@@ -19,11 +15,11 @@ export default function App() {
         />
         <Route
           path="/login"
-          element={<KakaoLogin />}
+          element={<Signup />}
         />
         <Route
           path="/loginSuccess"
-          element={<div style={{ padding: 32 }}>✅ 로그인 성공</div>}
+          element={<div style={{ padding: 32 }}>로그인 성공</div>}
         />
       </Routes>
     </BrowserRouter>
