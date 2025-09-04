@@ -1,0 +1,144 @@
+/* 컴포넌트 범위로만 적용되도록 .signup으로 스코프 */
+.signup {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f5f6;
+  padding: 24px;
+}
+
+.signup .card {
+  width: 390px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.signup .title {
+  margin: 0 0 24px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.signup .headline {
+  margin: 0 0 18px;
+  line-height: 1.28;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.signup .sub {
+  margin: 0 0 18px;
+  font-size: 12px;
+  color: #666;
+}
+
+.signup .label {
+  display: block;
+  font-size: 14px;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.signup .emailInput {
+  width: 100%;
+  padding: 14px 4px 10px;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+}
+
+.signup .emailInput:focus {
+  border-bottom-color: #111;
+}
+
+.signup .emailInput[aria-invalid="true"] {
+  border-bottom-color: #e11d48;
+}
+
+.signup .primary {
+  width: 100%;
+  margin-top: 16px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.02s ease, opacity 0.2s ease;
+}
+
+.signup .primary:hover {
+  transform: translateY(-1px);
+}
+
+.signup .primary.disabled {
+  background: #eee;
+  color: #aaa;
+  border-color: #eee;
+  cursor: not-allowed;
+}
+
+.signup .divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 12px;
+  margin: 22px 0 14px;
+}
+
+.signup .divider::before,
+.signup .divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #e5e7eb;
+}
+
+.signup .socials {
+  display: grid;
+  gap: 12px;
+}
+
+.signup .social {
+  height: 48px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 15px;
+  color: #111;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.signup .social:hover {
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.signup .icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.signup .icon.kakao {
+  background: #fee500;
+  border: 1px solid #e6d600;
+}
