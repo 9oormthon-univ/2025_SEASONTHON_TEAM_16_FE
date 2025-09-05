@@ -7,6 +7,7 @@ import TranscriptionPage from "../pages/Transcription/TranscriptionPage";
 import GalleryPage from "../pages/Gallery/GalleryPage";
 import CommunityPage from "../pages/Community/CommunityPage";
 import LoginSuccess from "../pages/Login/LoginSuccess";
+import ProfilePage from "../pages/Profile/ProfilePage";
 
 export default function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ export default function AppRoutes() {
       <Route path="/transcription" element={<TranscriptionPage />} />
       <Route path="/gallery" element={<GalleryPage />} />
       <Route path="/community" element={<CommunityPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }

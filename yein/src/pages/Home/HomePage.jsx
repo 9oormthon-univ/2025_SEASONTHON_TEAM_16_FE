@@ -2,8 +2,10 @@ import Footer from "../../components/common/Footer";
 import styles from "./HomePage.module.css";
 import ProgressBar from "../../components/common/ProgressBar";
 import BestPostCard from "../../components/home/BestPostCard";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <div
       className={styles.container}
@@ -19,7 +21,11 @@ const HomePage = () => {
           <div className={styles.brandKanji}>禮仁</div>
           <div className={styles.brandSub}>조용히 쓰고, 크게 성장하다</div>
         </div>
-        <button className={styles.avatarBtn} aria-label="프로필 열기">
+        <button
+          className={styles.avatarBtn}
+          aria-label="프로필 열기"
+          onClick={() => navigate("/profile")}
+        >
           <div className={styles.avatarIcon}>👤</div>
         </button>
       </header>
