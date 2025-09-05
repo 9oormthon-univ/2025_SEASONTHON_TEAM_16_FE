@@ -1,0 +1,31 @@
+.progressWrap {
+  width: 100%;
+  max-width: 520px;
+}
+.progressTrack {
+  position: relative;
+  margin: 10px auto 4px;
+  height: 10px;
+  background: #eceff7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progressFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #a6b4ff, #e3a6ff);
+}
+.tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d2d6e6;
+}
+.progressHint {
+  text-align: center;
+  font-size: 11px;
+  color: #6b7280;
+}

@@ -1,0 +1,23 @@
+.postCard {
+  text-align: left;
+  border: 1px solid #eef0f7;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 10px 14px;
+}
+.postThumb {
+  height: 160px;
+  border-radius: 12px;
+  background: #f6f7fb;
+  display: grid;
+  place-items: center;
+}
+.imgPlaceholder {
+  font-size: 22px;
+  opacity: 0.55;
+}
+.postTitle {
+  margin-top: 10px;
+  color: #374151;
+  font-size: 14px;
+}
