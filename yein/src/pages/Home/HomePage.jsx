@@ -2,10 +2,9 @@ import Footer from "../../components/common/Footer";
 import styles from "./HomePage.module.css";
 import ProgressBar from "../../components/common/ProgressBar";
 import BestPostCard from "../../components/home/BestPostCard";
-import { useNavigate } from "react-router-dom";
+import Header from "../../components/common/Header";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   return (
     <div
       className={styles.container}
@@ -16,21 +15,7 @@ const HomePage = () => {
         backgroundPosition: "center",
       }}
     >
-      <header className={styles.header}>
-        <div className={styles.brand}>
-          <div className={styles.brandKanji}>
-            <img src="assets/images/logo.svg" alt="禮仁" />
-          </div>
-          <button
-            className={styles.avatarBtn}
-            aria-label="프로필 열기"
-            onClick={() => navigate("/profile")}
-          >
-            v
-          </button>
-        </div>
-        <div className={styles.brandSub}>조용히 쓰고, 크게 성장하다</div>
-      </header>
+      <Header />
 
       <section className={styles.petSection}>
         <div className={styles.petCircle}>
