@@ -43,7 +43,7 @@ export default function Redirection() {
 
         setDebug({ API_BASE, REDIRECT_URI, code: "(수신됨)" });
         setMsg("로그인 성공! 메인으로 이동합니다…");
-        setTimeout(() => nav("/loginSuccess", { replace: true }), 1000);
+        setTimeout(() => nav("/home", { replace: true }), 1000);
       } catch (err) {
         const status = err?.response?.status;
         const body = err?.response?.data;
