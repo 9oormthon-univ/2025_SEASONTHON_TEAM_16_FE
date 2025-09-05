@@ -19,7 +19,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       {items.map((item) => (
         <NavLink
           key={item.to}
@@ -28,17 +28,11 @@ const Footer = () => {
             `${styles.footerItem} ${isActive ? styles.active : ""}`
           }
         >
-          {({ isActive }) => (
-            <div
-              className={isActive ? styles.activeCircle : styles.inactiveCircle}
-            >
-              <img src={item.icon} alt={item.label} className={styles.icon} />
-              <span className={styles.name}>{item.label}</span>
-            </div>
-          )}
+          <img src={item.icon} alt={item.label} className={styles.icon} />
+          <span className={styles.name}>{item.label}</span>
         </NavLink>
       ))}
-    </div>
+    </footer>
   );
 };
 

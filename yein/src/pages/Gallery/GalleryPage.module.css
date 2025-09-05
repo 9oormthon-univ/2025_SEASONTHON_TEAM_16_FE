@@ -1,0 +1,47 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.mainContent {
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: "Cafe24 Ssurround air";
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  margin-bottom: 41px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  width: 56px;
+  height: 25px;
+  border-radius: 8px;
+  border: 1px solid #404955;
+  font-family: "Cafe24 Ssurround air";
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.33px;
+}
+
+.active {
+  background-color: #a0bcef;
+  color: white;
+  border: none;
+}
