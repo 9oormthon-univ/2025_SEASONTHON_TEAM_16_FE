@@ -18,16 +18,18 @@ const HomePage = () => {
     >
       <header className={styles.header}>
         <div className={styles.brand}>
-          <div className={styles.brandKanji}>禮仁</div>
-          <div className={styles.brandSub}>조용히 쓰고, 크게 성장하다</div>
+          <div className={styles.brandKanji}>
+            <img src="assets/images/logo.svg" alt="禮仁" />
+          </div>
+          <button
+            className={styles.avatarBtn}
+            aria-label="프로필 열기"
+            onClick={() => navigate("/profile")}
+          >
+            v
+          </button>
         </div>
-        <button
-          className={styles.avatarBtn}
-          aria-label="프로필 열기"
-          onClick={() => navigate("/profile")}
-        >
-          <div className={styles.avatarIcon}>👤</div>
-        </button>
+        <div className={styles.brandSub}>조용히 쓰고, 크게 성장하다</div>
       </header>
 
       <section className={styles.petSection}>
@@ -41,21 +43,18 @@ const HomePage = () => {
 
       <section className={styles.quoteSection}>
         <div className={styles.sectionLabel}>오늘의 문구 추천</div>
-        <blockquote className={styles.quote}>
-          “동해물과백두산이마르고닳도록”
-        </blockquote>
-        <button className={styles.secondaryBtn}>오늘의 문구 필사하기</button>
+        <p className={styles.quote}>“동해물과백두산이마르고닳도록”</p>
       </section>
+      <button className={styles.secondaryBtn}>오늘의 문구 필사하기</button>
 
       <section className={styles.bestSection}>
         <div className={styles.sectionLabel}>BEST 필사</div>
         <div className={styles.postGrid}>
           <BestPostCard />
           <BestPostCard />
+          <BestPostCard />
         </div>
       </section>
-
-      <div className={styles.footerSpacer} />
       <Footer />
     </div>
   );

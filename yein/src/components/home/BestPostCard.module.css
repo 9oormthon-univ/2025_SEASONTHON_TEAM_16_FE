@@ -1,13 +1,15 @@
 .postCard {
+  width: 169px;
+  height: 211px;
   text-align: left;
-  border: 1px solid #eef0f7;
-  background: #fff;
+  border: none;
+  padding: 0;
+  background: none;
   border-radius: 16px;
-  padding: 10px 10px 14px;
 }
 .postThumb {
   height: 160px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #f6f7fb;
   display: grid;
   place-items: center;
@@ -18,6 +20,8 @@
 }
 .postTitle {
   margin-top: 10px;
-  color: #374151;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  text-align: center;
 }

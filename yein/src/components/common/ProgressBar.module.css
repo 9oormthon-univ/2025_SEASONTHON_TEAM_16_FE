@@ -1,12 +1,12 @@
 .progressWrap {
+  max-width: 332px;
   width: 100%;
-  max-width: 520px;
 }
 .progressTrack {
   position: relative;
-  margin: 10px auto 4px;
-  height: 10px;
-  background: #eceff7;
+  margin: 5px auto 4px;
+  height: 12px;
+  border: 1.5px solid black;
   border-radius: 999px;
   overflow: hidden;
 }
@@ -15,17 +15,28 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(90deg, #a6b4ff, #e3a6ff);
+  background: linear-gradient(
+    90deg,
+    #ffeede,
+    #fbcde2,
+    #d4e0f7,
+    #f3d8e6,
+    #ffeede
+  );
+  border-radius: inherit;
 }
 .tick {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: #d2d6e6;
+  width: 1.5px;
+  background: black;
 }
 .progressHint {
   text-align: center;
-  font-size: 11px;
-  color: #6b7280;
+  font-family: "Pretendard Variable", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 7px;
+  color: #414a56;
 }
