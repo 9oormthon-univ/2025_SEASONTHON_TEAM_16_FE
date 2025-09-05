@@ -31,7 +31,6 @@ export async function fetchKakaoIdToken(code, returnedState) {
   if (!idToken) throw new Error("id_token 없음 (scope=openid 확인 필요)");
   return idToken;
 }
-
 export async function loginWithIdToken(idToken) {
   const LOGIN_ENDPOINT = `${API_BASE}/auth/login`;
 
@@ -48,5 +47,18 @@ export async function loginWithIdToken(idToken) {
     }
   );
 
-  return res.data;
+  const data = res.data;
+
+  const accessToken = data.accessToken || data.data?.accessToken;
+  const refreshToken = data.refreshToken || data.data?.refreshToken;
+
+  if (accessToken && refreshToken) {
+    localStorage.setItem("accessToken", accessToken); // camelCase로 저장
+    localStorage.setItem("refreshToken", refreshToken); // camelCase로 저장
+    console.log("✅ 토큰 저장 완료:", { accessToken, refreshToken });
+  } else {
+    console.warn("⚠️ 로그인 응답에 토큰 없음:", data);
+  }
+
+  return data;
 }

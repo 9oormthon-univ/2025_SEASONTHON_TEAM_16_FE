@@ -35,10 +35,6 @@ export default function Redirection() {
         const { success, message, data } = apiRes || {};
         if (!success) throw new Error(message || "로그인 실패");
 
-        if (data?.accessToken)
-          localStorage.setItem("access_token", data.accessToken);
-        if (data?.refreshToken)
-          localStorage.setItem("refresh_token", data.refreshToken);
         if (data?.user) localStorage.setItem("user", JSON.stringify(data.user));
 
         setDebug({ API_BASE, REDIRECT_URI, code: "(수신됨)" });
