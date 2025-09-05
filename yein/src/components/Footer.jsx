@@ -2,93 +2,42 @@ import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
+  const items = [
+    { to: "/pet", icon: "/assets/icons/pet.svg", label: "펫" },
+    {
+      to: "/transcription",
+      icon: "/assets/icons/transcription.svg",
+      label: "필사하기",
+    },
+    { to: "/home", icon: "/assets/icons/home.svg", label: "홈" },
+    { to: "/gallery", icon: "/assets/icons/gallery.svg", label: "갤러리" },
+    {
+      to: "/community",
+      icon: "/assets/icons/community.svg",
+      label: "커뮤니티",
+    },
+  ];
+
   return (
     <div className={styles.footer}>
-      <NavLink
-        to="/pet"
-        className={({ isActive }) =>
-          `${styles.footerItem} ${isActive ? styles.active : ""}`
-        }
-      >
-        {({ isActive }) => (
-          <div className={isActive ? styles.activeCircle : ""}>
-            <img src="/assets/icons/pet.svg" alt="펫" className={styles.icon} />
-            <span className={styles.name}>펫</span>
-          </div>
-        )}
-      </NavLink>
-
-      <NavLink
-        to="/transcription"
-        className={({ isActive }) =>
-          `${styles.footerItem} ${isActive ? styles.active : ""}`
-        }
-      >
-        {({ isActive }) => (
-          <div className={isActive ? styles.activeCircle : ""}>
-            <img
-              src="/assets/icons/transcription.svg"
-              alt="필사하기"
-              className={styles.icon}
-            />
-            <span className={styles.name}>필사하기</span>
-          </div>
-        )}
-      </NavLink>
-
-      <NavLink
-        to="/home"
-        className={({ isActive }) =>
-          `${styles.footerItem} ${isActive ? styles.active : ""}`
-        }
-      >
-        {({ isActive }) => (
-          <div className={isActive ? styles.activeCircle : ""}>
-            <img
-              src="/assets/icons/home.svg"
-              alt="홈"
-              className={styles.icon}
-            />
-            <span className={styles.name}>홈</span>
-          </div>
-        )}
-      </NavLink>
-
-      <NavLink
-        to="/gallery"
-        className={({ isActive }) =>
-          `${styles.footerItem} ${isActive ? styles.active : ""}`
-        }
-      >
-        {({ isActive }) => (
-          <div className={isActive ? styles.activeCircle : ""}>
-            <img
-              src="/assets/icons/gallery.svg"
-              alt="갤러리"
-              className={styles.icon}
-            />
-            <span className={styles.name}>갤러리</span>
-          </div>
-        )}
-      </NavLink>
-
-      <NavLink
-        to="/community"
-        className={({ isActive }) =>
-          `${styles.footerItem} ${isActive ? styles.active : ""}`
-        }
-      >
-        {({ isActive }) => (
-          <div className={isActive ? styles.activeCircle : ""}>
-            <img
-              src="/assets/icons/community.svg"
-              alt="커뮤니티"
-              className={styles.icon}
-            />
-            <span className={styles.name}>커뮤니티</span>
-          </div>
-        )}
-      </NavLink>
+      {items.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          className={({ isActive }) =>
+            `${styles.footerItem} ${isActive ? styles.active : ""}`
+          }
+        >
+          {({ isActive }) => (
+            <div
+              className={isActive ? styles.activeCircle : styles.inactiveCircle}
+            >
+              <img src={item.icon} alt={item.label} className={styles.icon} />
+              <span className={styles.name}>{item.label}</span>
+            </div>
+          )}
+        </NavLink>
+      ))}
     </div>
   );
 };
