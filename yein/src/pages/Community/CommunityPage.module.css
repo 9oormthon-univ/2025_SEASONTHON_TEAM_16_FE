@@ -96,6 +96,7 @@
   padding: 15px 24px;
   margin-bottom: 20px;
   border: 1px solid #afb1b6;
+  cursor: pointer;
 }
 
 .postCard h4 {

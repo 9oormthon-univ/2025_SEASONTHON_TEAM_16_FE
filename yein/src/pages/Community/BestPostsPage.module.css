@@ -36,6 +36,7 @@
   padding: 28px 24px 18px 24px;
   margin-bottom: 20px;
   box-shadow: 0px 2px 10px 0px #00000040 inset;
+  cursor: pointer;
 }
 
 .rank {
