@@ -21,6 +21,36 @@ const GalleryPage = () => {
     })();
   }, []);
 
+  const getFilteredPosts = () => {
+    const today = new Date();
+
+    if (selected === "today") {
+      return posts.filter((post) => {
+        const postDate = new Date(post.createdAt);
+        return (
+          postDate.toISOString().slice(0, 10) ===
+          today.toISOString().slice(0, 10)
+        );
+      });
+    }
+
+    if (selected === "week") {
+      const startOfWeek = new Date(today);
+      const day = today.getDay(); // 일=0, 월=1 ...
+      const diffToMonday = day === 0 ? 6 : day - 1; // 일요일이면 -6, 그 외는 - (day-1)
+      startOfWeek.setDate(today.getDate() - diffToMonday);
+
+      return posts.filter((post) => {
+        const postDate = new Date(post.createdAt);
+        return postDate >= startOfWeek && postDate <= today;
+      });
+    }
+
+    return posts;
+  };
+
+  const filteredPosts = getFilteredPosts();
+
   return (
     <div
       className={styles.container}
@@ -57,12 +87,12 @@ const GalleryPage = () => {
 
         {/* 게시글 목록 */}
         <div className={styles.grid}>
-          {posts.length > 0 ? (
-            posts.map((post) => (
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
               <div
                 key={post.id}
                 className={styles.card}
-                onClick={() => navigate(`/detail/${post.id}`)} // ✅ 클릭 시 상세 페이지 이동
+                onClick={() => navigate(`/detail/${post.id}`)}
               >
                 <img
                   src={post.imageUrl}
@@ -72,7 +102,11 @@ const GalleryPage = () => {
               </div>
             ))
           ) : (
-            <p className={styles.emptyText}>아직 업로드한 필사가 없습니다.</p>
+            <p className={styles.emptyText}>
+              {selected === "today"
+                ? "오늘 업로드한 필사가 없습니다."
+                : "이번주 업로드한 필사가 없습니다."}
+            </p>
           )}
         </div>
       </main>
