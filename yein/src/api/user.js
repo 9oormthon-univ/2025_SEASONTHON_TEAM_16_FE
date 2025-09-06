@@ -1,13 +1,9 @@
 import { api } from "./client";
 
-// 내 정보 조회
-export const getMyProfile = () => api.get("/users/me");
+export const getMyProfile = () => api.get("/api/users/me");
 
-// 내 펫 정보 조회
-export const getMyPet = () => api.get("/pets/me");
+export const getMyPet = () => api.get("/api/pets/me");
 
-// 로그아웃
 export const logout = () => api.post("/auth/logout");
 
-// 회원 탈퇴
-export const deleteAccount = () => api.delete("/users/me");
+export const deleteAccount = () => api.delete("/api/users/me");
