@@ -149,8 +149,10 @@ const HomePage = () => {
               {pet.name} (Lv. {pet.level})
             </div>
             <ProgressBar
-              value={Math.floor((pet.currentXp / pet.xpToNextLevel) * 100)}
+              currentXp={pet.currentXp}
+              xpToNextLevel={pet.xpToNextLevel}
             />
+
             <button
               className={styles.primaryBtn}
               onClick={() => navigate("/pet")}

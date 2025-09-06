@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/common/Footer";
 import ProgressBar from "../../components/common/ProgressBar";
 import styles from "./ProfilePage.module.css";
-import { getMyProfile, getMyPet, logout } from "../../api/user";
+import { getMyProfile, logout } from "../../api/user";
+import { getPetStatus } from "../../api/pet";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
@@ -11,44 +12,42 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // ProfilePage.jsx (발췌)
-useEffect(() => {
-  async function fetchData() {
-    try {
-      const [me, petRes] = await Promise.all([ getMyProfile(), getMyPet() ]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // 프로필 + 펫 동시 요청
+        const [me, petRes] = await Promise.all([
+          getMyProfile(),
+          getPetStatus(),
+        ]);
 
-      // 프로필은 그대로
-      setProfile(me?.data ?? me);
+        setProfile(me);
 
-      // ✅ /api/pets/me 의 data를 화면용으로 정규화
-      const raw = petRes?.data ?? petRes;
-      const xp    = Number(raw?.currentXp);
-      const goal  = Number(raw?.xpToNextLevel);
+        // ✅ 펫 데이터 정규화
+        const xp = Number(petRes?.currentXp ?? 0);
+        const goal = Number(petRes?.xpToNextLevel ?? 100);
 
-      const normalizedPet = {
-        level: Number(raw?.level ?? 1),
-        experience: xp,                            // 현재 XP
-        xpToNextLevel: goal,                       // 다음 레벨까지 총 필요 XP
-        remainingXp: Math.max(0, goal - xp),       // 남은 XP
-        experiencePercent: goal > 0
-          ? Math.min(100, Math.round((xp / goal) * 100))
-          : 0,
-        petType: raw?.petType ?? "DEFAULT",
-        evolutionStage: Number(raw?.evolutionStage ?? 0),
-      };
-
-      setPet(normalizedPet);
-    } catch (err) {
-      console.error("데이터 불러오기 실패:", err);
-      if (err?.response?.status === 401 || err?.response?.status === 403) {
-        window.location.replace("/login?error=unauthorized");
+        setPet({
+          name: petRes?.name ?? "나의 펫",
+          level: Number(petRes?.level ?? 1),
+          currentXp: xp,
+          xpToNextLevel: goal,
+          remainingXp: Math.max(0, goal - xp),
+          experiencePercent: goal > 0 ? Math.round((xp / goal) * 100) : 0,
+          petType: petRes?.petType ?? "DEFAULT",
+          evolutionStage: Number(petRes?.evolutionStage ?? 1),
+        });
+      } catch (err) {
+        console.error("데이터 불러오기 실패:", err);
+        if (err?.response?.status === 401 || err?.response?.status === 403) {
+          window.location.replace("/login?error=unauthorized");
+        }
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
     }
-  }
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -57,10 +56,9 @@ useEffect(() => {
       console.error("로그아웃 실패:", err);
     } finally {
       localStorage.clear();
-      window.location.href = "/login"; // 로그아웃 후 이동
+      window.location.href = "/login";
     }
   };
-
 
   if (loading) return <div>로딩중...</div>;
   if (!profile || !pet) return <div>데이터 없음</div>;
@@ -72,21 +70,32 @@ useEffect(() => {
         <div className={styles.avatarWrap}>
           <div className={styles.avatar}>
             {profile?.profileImageUrl ? (
-              <img src={profile.profileImageUrl} alt="프로필" className={styles.profileImg}/>
-                ) : (
-                  <span className={styles.profileFallback}>👤</span>
-                )}
+              <img
+                src={profile.profileImageUrl}
+                alt="프로필"
+                className={styles.profileImg}
+              />
+            ) : (
+              <span className={styles.profileFallback}>👤</span>
+            )}
           </div>
           <button className={styles.editBtn} aria-label="프로필 사진 수정">
             ✎
           </button>
         </div>
         <div className={styles.userName}>{profile.name}</div>
+
+        {/* ✅ 펫 레벨 / 경험치 */}
         <div className={styles.levelInfo}>
           <span className={styles.levelTag}>Lv. {pet.level}</span>
-          <span className={styles.xpTag}>XP: {pet.experience}</span>
+          <span className={styles.xpTag}>
+            XP: {pet.currentXp} / {pet.xpToNextLevel}
+          </span>
         </div>
-        <ProgressBar value={pet.experiencePercent} />
+        <ProgressBar
+          currentXp={pet.currentXp}
+          xpToNextLevel={pet.xpToNextLevel}
+        />
         <p className={styles.progressHint}>
           레벨 업까지 앞으로 {pet.remainingXp} 경험치가 남았어요!
         </p>
@@ -127,10 +136,21 @@ useEffect(() => {
       {/* 네비게이션 카드 */}
       <section className={styles.menuSection}>
         <div className={styles.menuGrid}>
-          <button className={styles.menuCard} onClick={() => navigate("/transcription")}>추천 글귀</button>
-          <button className={styles.menuCard} onClick={() => navigate("/")}>스크랩한 글귀</button>
-          <button className={styles.menuCard} onClick={() => navigate("/")}>내가 쓴 댓글</button>
-          <button className={styles.menuCard} onClick={() => navigate("/")}>작성한 게시물</button>
+          <button
+            className={styles.menuCard}
+            onClick={() => navigate("/transcription")}
+          >
+            추천 글귀
+          </button>
+          <button className={styles.menuCard} onClick={() => navigate("/")}>
+            스크랩한 글귀
+          </button>
+          <button className={styles.menuCard} onClick={() => navigate("/")}>
+            내가 쓴 댓글
+          </button>
+          <button className={styles.menuCard} onClick={() => navigate("/")}>
+            작성한 게시물
+          </button>
         </div>
       </section>
 
