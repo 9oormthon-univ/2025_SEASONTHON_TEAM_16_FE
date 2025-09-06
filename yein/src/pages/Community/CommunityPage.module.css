@@ -1,0 +1,236 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  color: #414a56;
+}
+
+/* 검색창 */
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 6px 12px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #414a56;
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  opacity: 0.6;
+}
+
+.searchBar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: "Cafe24SsurroundAir";
+  background: transparent;
+}
+
+/* 섹션 */
+.section {
+  margin-bottom: 40px;
+}
+
+.subTitleWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subTitle {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+  margin-bottom: 22px;
+}
+
+.moreIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* 게시글 리스트 */
+.postList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.postCard {
+  position: relative;
+  border-radius: 12px;
+  padding: 21px 24px;
+  margin-bottom: 20px;
+  border: 1px solid #afb1b6;
+}
+
+.postCard h4 {
+  font-size: 16px;
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #222;
+}
+
+.postCard p {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: #555;
+}
+
+.postCard span {
+  font-size: 12px;
+  color: #888;
+}
+
+.bookmarkIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* 버튼 영역 */
+.buttonContainer {
+  width: 100%;
+  max-width: 400px;
+  position: fixed;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 25px;
+  border-radius: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    #ffffff 15%,
+    #ffffff 100%
+  );
+  box-sizing: border-box;
+}
+
+.button {
+  height: 40px;
+  border-radius: 15px;
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-style: Light;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+}
+
+.myPosts {
+  background: #a0bcef;
+  color: #fff;
+}
+
+.createPost {
+  background: #414a56;
+  color: #fff;
+}
+
+/* 베스트 리스트 */
+.bestList {
+  height: 189px;
+  list-style: none;
+  border-radius: 12px;
+  box-shadow: 0px 2px 10px 0px #00000040 inset;
+  padding: 25px 24px;
+}
+
+.bestItem {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 10px 0;
+}
+
+.bestItem:last-child {
+  border-bottom: none;
+}
+
+.textBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 25px;
+}
+
+.title,
+.rank {
+  min-width: 30px;
+  max-width: 80px;
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info {
+  max-width: 120px;
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-style: Light;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

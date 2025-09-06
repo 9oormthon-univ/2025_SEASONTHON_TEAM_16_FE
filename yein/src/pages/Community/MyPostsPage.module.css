@@ -1,0 +1,56 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: "Cafe24Ssurround";
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.postList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.postCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.postCard h4 {
+  font-size: 16px;
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #222;
+}
+
+.postCard p {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: #555;
+}
+
+.postCard span {
+  font-size: 13px;
+  color: #666;
+}
