@@ -9,13 +9,15 @@ import LoaderShapes from "../../components/common/Loader";
 export default function TranscriptionPage() {
   const navigate = useNavigate();
 
-  const [tip] = useState("필사 팁: 조급해하지 말고 천천히 써서 마음을 담아봐요.");
+  const [tip] = useState(
+    "필사 팁: 조급해하지 말고 천천히 써서 마음을 담아봐요."
+  );
   const [rec, setRec] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);         
+  const [preview, setPreview] = useState(null);
   const [imageDataUrl, setImageDataUrl] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const objectUrlRef = useRef(null);
@@ -117,20 +119,25 @@ export default function TranscriptionPage() {
 
       const payload = {
         title: title.trim(),
-        moods, 
+        moods,
         quote: rec?.replace(/[“”]/g, "") || null,
       };
 
-      form.append("data", new Blob([JSON.stringify(payload)], { type: "application/json" }));
+      form.append(
+        "data",
+        new Blob([JSON.stringify(payload)], { type: "application/json" })
+      );
 
-
-      const res = await fetch(`${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: form,
-      });
+      const res = await fetch(
+        `${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: form,
+        }
+      );
 
       if (!res.ok) {
         if (res.status === 401 || res.status === 403) {
@@ -145,7 +152,7 @@ export default function TranscriptionPage() {
       navigate("/analyze", {
         state: {
           ...(result?.data || {}),
-          image: imageDataUrl || preview, 
+          image: imageDataUrl || preview,
         },
       });
     } catch (e) {
@@ -157,8 +164,13 @@ export default function TranscriptionPage() {
   };
 
   return (
-    <div className={styles.container} style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}>
-      <Header />
+    <div
+      className={styles.container}
+      style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}
+    >
+      <div className={styles.header_wrapper}>
+        <Header />
+      </div>
       <section className={styles.reco}>
         <div className={styles.recoTitle}>오늘의 필사하기</div>
         <div className={styles.recoLabel}>오늘의 추천문구</div>
@@ -197,16 +209,30 @@ export default function TranscriptionPage() {
           onChange={handleFileChange}
           className={styles.hiddenInput}
         />
-        <label htmlFor="uploadInput" className={styles.uploadLabel} aria-label="이미지 업로드">
+        <label
+          htmlFor="uploadInput"
+          className={styles.uploadLabel}
+          aria-label="이미지 업로드"
+        >
           {preview ? (
-            <img src={preview} className={styles.preview} alt="업로드 미리보기" />
+            <img
+              src={preview}
+              className={styles.preview}
+              alt="업로드 미리보기"
+            />
           ) : (
-            <span className={styles.uploadText}>여기로 이미지를 드래그하거나 클릭해서 선택하세요</span>
+            <span className={styles.uploadText}>
+              여기로 이미지를 드래그하거나 클릭해서 선택하세요
+            </span>
           )}
         </label>
       </div>
 
-      <button className={styles.submit} disabled={!file || submitting} onClick={handleSubmit}>
+      <button
+        className={styles.submit}
+        disabled={!file || submitting}
+        onClick={handleSubmit}
+      >
         다음
       </button>
 

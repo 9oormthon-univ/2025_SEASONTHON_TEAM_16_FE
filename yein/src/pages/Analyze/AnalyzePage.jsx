@@ -19,13 +19,15 @@ function ScoreBar({ label, value, max = 25, color = "#9CA3AF" }) {
             style={{
               width: `${pct}%`,
               backgroundColor: color,
-              borderColor: color, 
+              borderColor: color,
             }}
           />
         </div>
       </div>
 
-      <span className={styles.value} aria-label={`${value}점`}>{value}</span>
+      <span className={styles.value} aria-label={`${value}점`}>
+        {value}
+      </span>
     </div>
   );
 }
@@ -40,7 +42,6 @@ export default function AnalyzePage() {
     if (state) {
       sessionStorage.setItem("analyze_state", JSON.stringify(state));
       setData(state);
-
     } else {
       const cached = sessionStorage.getItem("analyze_state");
       if (cached) setData(JSON.parse(cached));
@@ -49,12 +50,18 @@ export default function AnalyzePage() {
 
   if (!data) return <div>결과 데이터가 없습니다.</div>;
 
-  const handleRetry = () => navigate('/transcription');
-  const handleComplete = () => navigate("/home"); 
+  const handleRetry = () => navigate("/transcription");
+  const handleComplete = () => navigate("/home");
 
   return (
-    <div className={styles.container} style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}>
-      <Header />
+    <div
+      className={styles.container}
+      style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}
+    >
+      <div className={styles.header_wrapper}>
+        <Header />
+      </div>
+
       <div className={styles.Title}>AI 분석 결과</div>
       {data.image && (
         <img
@@ -79,10 +86,14 @@ export default function AnalyzePage() {
           <span className={styles.scoreLabel}>{data.totalScore}/100</span>
         </div>
 
-        <ScoreBar label="정렬"   value={data.alignmentScore} color="#9CA3AF"/>
-        <ScoreBar label="간격"   value={data.spacingScore} color="#A0BCEF"/>
-        <ScoreBar label="일관성" value={data.consistencyScore} color="#D8D3F4"/>
-        <ScoreBar label="길이"   value={data.lengthScore} color="#EFC7D8"/>
+        <ScoreBar label="정렬" value={data.alignmentScore} color="#9CA3AF" />
+        <ScoreBar label="간격" value={data.spacingScore} color="#A0BCEF" />
+        <ScoreBar
+          label="일관성"
+          value={data.consistencyScore}
+          color="#D8D3F4"
+        />
+        <ScoreBar label="길이" value={data.lengthScore} color="#EFC7D8" />
       </div>
 
       <div className={styles.analysisBox}>

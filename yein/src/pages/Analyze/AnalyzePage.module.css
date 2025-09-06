@@ -1,5 +1,5 @@
 body {
-  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-family: "Cafe24SsurroundAir", sans-serif;
 }
 
 .Title {
@@ -9,12 +9,12 @@ body {
   text-align: left;
   padding-left: 20px;
   margin-bottom: 0px;
-  font-family: 'Cafe24SsurroundAir', sans-serif;
-  align-self: flex-start; 
+  font-family: "Cafe24SsurroundAir", sans-serif;
+  align-self: flex-start;
 }
 
 .container {
-  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-family: "Cafe24SsurroundAir", sans-serif;
   padding-top: 50px;
   max-width: 400px;
   height: 100vh;
@@ -27,68 +27,69 @@ body {
   background-size: cover;
   background-position: center;
 }
-
+.header_wrapper {
+  width: 100%;
+  padding: 0 25px;
+}
 .scoresSection {
   width: 100%;
-  max-width: 360px;         
-  margin: 10px auto 0;      
-  padding: 0 16px;           
+  max-width: 360px;
+  margin: 10px auto 0;
+  padding: 0 16px;
   box-sizing: border-box;
 }
 
-
 .scoresTitle {
-  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-family: "Cafe24SsurroundAir", sans-serif;
   margin: 0 0 10px;
   font-size: 16px;
   font-weight: 700;
 }
 
 .label {
-  flex: 0 0 45px;       
+  flex: 0 0 45px;
   text-align: left;
   white-space: nowrap;
 }
 
 .value {
-  flex: 0 0 32px;        
+  flex: 0 0 32px;
   text-align: right;
   font-weight: 600;
 }
 
-
 .analyzeImage {
-  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-family: "Cafe24SsurroundAir", sans-serif;
   max-width: 320px;
   width: 100%;
   height: auto;
   display: block;
   margin: 16px auto;
-  border: 1px solid #414A56;
+  border: 1px solid #414a56;
   border-radius: 12px;
 }
 
 .analysisBox {
-  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-family: "Cafe24SsurroundAir", sans-serif;
   font-size: 10px;
   max-width: 332px;
-  max-height: 145px;     
-  overflow-y: auto;      
+  max-height: 145px;
+  overflow-y: auto;
   padding: 42px;
   margin: 16px 0;
   margin-bottom: -5px;
   border-radius: 12px;
   border: 1px solid #ddd;
-  background: #EFC7D8;
-  text-align: left;        
+  background: #efc7d8;
+  text-align: left;
   line-height: 1.5;
 }
 
 .totalScore {
   font-family: "Cafe24 Ssurround Air", sans-serif;
   display: flex;
-  justify-content: space-between; 
-  align-items: center;            
+  justify-content: space-between;
+  align-items: center;
   font-size: 16px;
   font-weight: 500;
   margin: 12px auto;
@@ -97,7 +98,7 @@ body {
 }
 
 .scoreLabel {
-  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-family: "Cafe24SsurroundAir", sans-serif;
 }
 
 .scoreItem {
@@ -105,16 +106,16 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-left: 20px;         
+  margin-left: 20px;
   gap: 12px;
   margin: 0 0;
 }
 .scale {
-  flex: 1 1 auto;        
+  flex: 1 1 auto;
 }
 
 .barWrapper {
-  width: 100%;           
+  width: 100%;
   height: 14px;
   background: #fff;
   border: 1px solid #333;
@@ -128,7 +129,13 @@ body {
 }
 
 @media (max-width: 420px) {
-  .scoreItem { gap: 8px; }
-  .label { flex-basis: 56px; }
-  .value { min-width: 32px; }
+  .scoreItem {
+    gap: 8px;
+  }
+  .label {
+    flex-basis: 56px;
+  }
+  .value {
+    min-width: 32px;
+  }
 }
