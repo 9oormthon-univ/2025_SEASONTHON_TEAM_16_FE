@@ -108,7 +108,11 @@ const CommunityPage = () => {
           <h3 className={styles.subTitle}>최근 게시물</h3>
           <ul className={styles.postList}>
             {latestPosts.map((post) => (
-              <li key={post.id} className={styles.postCard}>
+              <li
+                key={post.id}
+                className={styles.postCard}
+                onClick={() => navigate(`/post/${post.id}`)} // ✅ 카드 클릭 시 상세 페이지 이동
+              >
                 <div className={styles.postTop}>
                   <span className={styles.recenttitle}>{post.title}</span>
                   <img
@@ -119,7 +123,8 @@ const CommunityPage = () => {
                     }
                     alt="스크랩"
                     className={styles.bookmarkIcon}
-                    onClick={async () => {
+                    onClick={async (e) => {
+                      e.stopPropagation();
                       try {
                         await toggleLike(post.id);
                         setLatestPosts((prev) =>
@@ -140,13 +145,17 @@ const CommunityPage = () => {
                 <div className={styles.mode}>
                   <span
                     className={styles.modebutton}
-                    onClick={() => navigate(`/community/edit/${post.id}`)} // 수정 페이지로 이동
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/community/edit/${post.id}`);
+                    }}
                   >
                     수정
                   </span>
                   <span
                     className={styles.modebutton}
-                    onClick={async () => {
+                    onClick={async (e) => {
+                      e.stopPropagation();
                       if (!window.confirm("정말 삭제하시겠습니까?")) return;
                       try {
                         await deletePost(post.id);
