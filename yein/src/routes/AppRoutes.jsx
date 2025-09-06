@@ -16,7 +16,7 @@ import Intro from "../pages/Introduce/IntroPage";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Signup />} />
+      <Route path="/" element={<Intro />} />
       <Route path="/login" element={<Signup />} />
       <Route path="/login/success" element={<LoginSuccess />} />
       <Route path="/oidc-callback" element={<Redirection />} />
