@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CommunityPage.module.css";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
-import { getPosts } from "../../api/post";
-import { deletePost, toggleLike } from "../../api/post";
+import { getPosts, deletePost, toggleScrap } from "../../api/post";
 
 const CommunityPage = () => {
   const [bestPosts, setBestPosts] = useState([]);
@@ -15,15 +14,9 @@ const CommunityPage = () => {
 
   const fetchPosts = async () => {
     try {
-      // 주간 Best (조회수 기준 상위 3개)
-      const bestData = await getPosts({
-        sortBy: "view",
-        page: 0,
-        size: 3,
-      });
+      const bestData = await getPosts({ sortBy: "view", page: 0, size: 3 });
       setBestPosts(bestData.content || []);
 
-      // 최신 게시물 (최신순 5개, 검색 적용)
       const latestData = await getPosts({
         sortBy: "latest",
         page: 0,
@@ -111,13 +104,13 @@ const CommunityPage = () => {
               <li
                 key={post.id}
                 className={styles.postCard}
-                onClick={() => navigate(`/post/${post.id}`)} // ✅ 카드 클릭 시 상세 페이지 이동
+                onClick={() => navigate(`/post/${post.id}`)}
               >
                 <div className={styles.postTop}>
                   <span className={styles.recenttitle}>{post.title}</span>
                   <img
                     src={
-                      post.isLiked
+                      post.isScraped
                         ? "/assets/icons/clicked_bookmark.svg"
                         : "/assets/icons/bookmark.svg"
                     }
@@ -126,10 +119,12 @@ const CommunityPage = () => {
                     onClick={async (e) => {
                       e.stopPropagation();
                       try {
-                        await toggleLike(post.id);
+                        await toggleScrap(post.id);
                         setLatestPosts((prev) =>
                           prev.map((p) =>
-                            p.id === post.id ? { ...p, isLiked: !p.isLiked } : p
+                            p.id === post.id
+                              ? { ...p, isScraped: !p.isScraped }
+                              : p
                           )
                         );
                       } catch (err) {

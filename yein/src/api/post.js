@@ -94,7 +94,7 @@ export const updatePost = async (postId, form, image) => {
   }
 };
 
-// 게시글 좋아요(북마크) 토글
+// 게시글 좋아요 토글
 export const toggleLike = async (postId) => {
   try {
     const res = await api.post(`/api/posts/${postId}/likes`);
@@ -103,4 +103,41 @@ export const toggleLike = async (postId) => {
     console.error("게시글 좋아요 토글 실패:", error);
     throw error;
   }
+};
+
+// 게시글 스크랩 (북마크) 토글
+export const toggleScrap = async (postId) => {
+  try {
+    const res = await api.post(`/api/scraps/${postId}`);
+    return res.data;
+  } catch (error) {
+    console.error("스크랩 토글 실패:", error);
+    throw error;
+  }
+};
+
+// 댓글 조회
+export const getComments = async (postId, page = 0, size = 10) => {
+  const res = await api.get(`/api/comments/posts/${postId}`, {
+    params: { page, size },
+  });
+  return res.data.data;
+};
+
+// 댓글 작성
+export const createComment = async (postId, content) => {
+  const res = await api.post(`/api/comments/posts/${postId}`, { content });
+  return res.data.data;
+};
+
+// 댓글 수정
+export const editComment = async (commentId, content) => {
+  const res = await api.put(`/api/comments/${commentId}`, { content });
+  return res.data.data;
+};
+
+// 댓글 삭제
+export const deleteComment = async (commentId) => {
+  const res = await api.delete(`/api/comments/${commentId}`);
+  return res.data.data;
 };
