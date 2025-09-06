@@ -33,16 +33,14 @@ export async function fetchKakaoIdToken(code, returnedState) {
 }
 
 export async function loginWithIdToken(idToken) {
-  const res = await fetch(`${API_BASE.replace(/\/$/,"")}/auth/kakao/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ idToken }), // 서버 사양에 따라 { id_token } 등 필드명 확인
-    credentials: "include", // 서버가 세션도 세팅한다면 유지, 아니면 제거해도 됨
-  });
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`LOGIN HTTP ${res.status}: ${text}`);
-  }
-  return res.json(); // { success, data:{ accessToken, refreshToken?, user } }
+  return axios.post(
+    `${API_BASE}/auth/login`,
+    {}, // body 없음
+    {
+      headers: {
+        id_token: idToken,   // 서버가 요구하는 헤더
+      },
+      withCredentials: true, // 세션 쿠키 쓴다면 필요
+    }
+  ).then(res => res.data);
 }
