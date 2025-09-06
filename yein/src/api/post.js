@@ -62,3 +62,45 @@ export const createPost = async (formData) => {
     throw error;
   }
 };
+
+// 게시글 삭제
+export const deletePost = async (postId) => {
+  try {
+    const res = await api.delete(`/api/posts/${postId}`);
+    return res.data;
+  } catch (error) {
+    console.error("게시글 삭제 실패:", error);
+    throw error;
+  }
+};
+
+// 게시글 수정
+export const updatePost = async (postId, form, image) => {
+  try {
+    const formData = new FormData();
+    formData.append(
+      "data",
+      new Blob([JSON.stringify(form)], { type: "application/json" })
+    );
+    if (image) formData.append("image", image);
+
+    const res = await api.patch(`/api/posts/${postId}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return res.data;
+  } catch (error) {
+    console.error("게시글 수정 실패:", error);
+    throw error;
+  }
+};
+
+// 게시글 좋아요(북마크) 토글
+export const toggleLike = async (postId) => {
+  try {
+    const res = await api.post(`/api/posts/${postId}/likes`);
+    return res.data;
+  } catch (error) {
+    console.error("게시글 좋아요 토글 실패:", error);
+    throw error;
+  }
+};
