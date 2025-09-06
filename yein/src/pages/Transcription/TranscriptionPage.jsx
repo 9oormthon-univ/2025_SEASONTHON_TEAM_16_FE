@@ -4,6 +4,7 @@ import Footer from "../../components/common/Footer";
 import Header from "../../components/common/Header";
 import MoodSelector from "../../components/Transcription/MoodSelector";
 import styles from "./Transcription.module.css";
+import LoaderShapes from "../../components/common/Loader";
 
 export default function TranscriptionPage() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ export default function TranscriptionPage() {
 
   const [title, setTitle] = useState("");
   const [moods, setMoods] = useState([]);
+
+  const [submitting, setSubmitting] = useState(false);
 
   const API_BASE =
     (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE) ||
@@ -96,7 +99,9 @@ export default function TranscriptionPage() {
   }, []);
 
   const handleSubmit = async () => {
+    if (submitting) return;
     try {
+      setSubmitting(true);
       if (!file) throw new Error("이미지 파일이 없습니다.");
       if (!title.trim()) throw new Error("제목을 입력해 주세요.");
 
@@ -146,6 +151,8 @@ export default function TranscriptionPage() {
     } catch (e) {
       console.error("제출 실패:", e);
       alert(e.message || "요청 실패");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -199,11 +206,12 @@ export default function TranscriptionPage() {
         </label>
       </div>
 
-      <button className={styles.submit} disabled={!file} onClick={handleSubmit}>
+      <button className={styles.submit} disabled={!file || submitting} onClick={handleSubmit}>
         다음
       </button>
 
       <Footer />
+      {submitting && <LoaderShapes />}
     </div>
   );
 }
