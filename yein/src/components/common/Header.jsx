@@ -8,7 +8,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.brand}>
         <div className={styles.brandKanji}>
-          <img src="assets/images/logo.svg" alt="禮仁" />
+          <img src="/assets/images/logo.svg" alt="禮仁" />
         </div>
         <button
           className={styles.avatarBtn}
