@@ -85,6 +85,7 @@ const CommunityPage = () => {
                 src="/assets/icons/double_arrow.svg"
                 alt="더보기"
                 className={styles.moreIcon}
+                onClick={() => navigate("/best-posts")}
               />
             </div>
             {bestPosts.map((post, index) => (
