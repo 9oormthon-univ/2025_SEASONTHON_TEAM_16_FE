@@ -1,0 +1,57 @@
+/* reset.css */
+
+/* 박스 크기 계산을 border-box로 통일 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 기본 body 스타일 초기화 */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: sans-serif;
+  background: #fff;
+  color: #000;
+}
+
+/* 이미지, 비디오 같은 요소들이 컨테이너에 맞도록 */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 입력 요소들 기본 스타일 초기화 */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* 리스트 스타일 제거 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 링크 기본 스타일 제거 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 버튼 클릭 가능 표시 */
+button {
+  cursor: pointer;
+}

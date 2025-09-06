@@ -41,8 +41,17 @@ const HomePage = () => {
       <Header />
 
       <section className={styles.petSection}>
-        <div className={styles.petCircle}>
-          <img className={styles.petImg} src="" alt="펫" />
+        <div className={styles.pet_wrapper}>
+          <img
+            className={styles.petCircle}
+            src="/assets/images/bg_pet.svg"
+            alt="배경"
+          />
+          <img
+            className={styles.petImg}
+            src="/assets/images/puppy3.svg"
+            alt="펫"
+          />
         </div>
         <div className={styles.levelText}>나의 펫 (Lv. 4)</div>
         <ProgressBar value={65} />
