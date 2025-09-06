@@ -10,6 +10,7 @@ export default function Redirection() {
   const nav = useNavigate();
   const once = useRef(false);
   const [msg, setMsg] = useState("로그인 처리 중…");
+  
 
   const cleanup = () => {
     const clean = window.location.origin + window.location.pathname;

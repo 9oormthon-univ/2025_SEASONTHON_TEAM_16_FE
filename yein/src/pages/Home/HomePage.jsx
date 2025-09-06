@@ -108,7 +108,8 @@ const HomePage = () => {
               <BestPostCard
                 key={post.id || post.postId}
                 title={post.title}
-                thumbnail={post.thumbnailUrl}
+                thumbnail={post.thumbnailUrl || post.thumbnail || post.imageUrl}
+                protectedImage={false}
                 author={post.author?.nickname}
                 likes={post.likes}
                 onClick={() => navigate(`/posts/${post.id || post.postId}`)}   // ✅ 상세로 이동

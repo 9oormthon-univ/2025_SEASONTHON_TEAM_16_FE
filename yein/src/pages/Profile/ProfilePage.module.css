@@ -78,13 +78,21 @@
   background: linear-gradient(90deg, #a6b4ff, #e3a6ff);
 }
 
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .emailSection {
   margin-top: 16px;
   display: flex;
+  margin-bottom: 2%;
   justify-content: center;
   align-items: center;
   gap: 12px;
   font-size: 14px;
+  justify-content: space-between;
 }
 .emailLabel {
   color: #6b7280;
@@ -94,9 +102,11 @@
 }
 
 .statsSection {
-  margin-top: 20px;
+  width: calc(100% - 40px);
+  margin-top: 0px;
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
+  justify-content: space-between;
 }
 .statRow {
   display: flex;
@@ -105,8 +115,9 @@
   font-size: 14px;
 }
 .statValue {
-  font-weight: 600;
-  color: #4f46e5;
+  font-size: 14px;
+  font-weight: 400;
+  color: #A0BCEF;
 }
 
 .menuSection {
