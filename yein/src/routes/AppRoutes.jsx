@@ -15,6 +15,7 @@ import DetailPage from "../pages/Gallery/DetailPage";
 import RankPage from "../pages/Gallery/RankPage";
 import Intro from "../pages/Introduce/IntroPage";
 import BestPostsPage from "../pages/Community/BestPostsPage";
+import PostDetailPage from "../pages/Community/PostDetailPage";
 
 export default function AppRoutes() {
   return (
@@ -43,6 +44,7 @@ export default function AppRoutes() {
       <Route path="/community/myposts" element={<MyPostsPage />} />
       <Route path="/community/write" element={<PostCreatePage />} />
       <Route path="/best-posts" element={<BestPostsPage />} />
+      <Route path="/post/:postId" element={<PostDetailPage />} />
 
       {/* 프로필 */}
       <Route path="/profile" element={<ProfilePage />} />

@@ -43,3 +43,13 @@ export const createPost = async (formData) => {
     throw error;
   }
 };
+// ✅ 게시글 상세 조회
+export const getPostDetail = async (postId) => {
+  try {
+    const res = await api.get(`/api/posts/${postId}`);
+    return res.data.data; // <- API 명세의 data 객체 반환
+  } catch (error) {
+    console.error("게시글 상세 조회 실패:", error);
+    throw error;
+  }
+};
