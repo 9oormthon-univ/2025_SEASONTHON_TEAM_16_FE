@@ -13,6 +13,7 @@ import ProfilePage from "../pages/Profile/ProfilePage";
 import AnalyzePage from "../pages/Analyze/AnalyzePage";
 import DetailPage from "../pages/Gallery/DetailPage";
 import RankPage from "../pages/Gallery/RankPage";
+import Intro from "../pages/Introduce/IntroPage";
 
 export default function AppRoutes() {
   return (
@@ -43,6 +44,7 @@ export default function AppRoutes() {
 
       {/* 프로필 */}
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/intro" element={<Intro />} />
     </Routes>
   );
 }
