@@ -87,9 +87,8 @@ export default function TranscriptionPage() {
       if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
     };
   }, []);
+const handleSubmit = async () => {
 
-  // 제출
-  const handleSubmit = async () => {
   try {
     if (!file) throw new Error("이미지 파일이 없습니다.");
     if (!title.trim()) throw new Error("제목을 입력해 주세요.");
@@ -102,7 +101,6 @@ export default function TranscriptionPage() {
       return;
     }
 
-    // 2) formData 구성
     const form = new FormData();
     form.append("image", file, file.name);
 
@@ -111,6 +109,7 @@ export default function TranscriptionPage() {
       moods, // ["calm","happy"] ...
       quote: rec?.replace(/[“”]/g, "") || null,
     };
+
 
     // 서버가 multipart/form-data에서 JSON 파트를 기대하는 경우 권장
     form.append("data", new Blob([JSON.stringify(payload)], { type: "application/json" }));
@@ -137,7 +136,6 @@ export default function TranscriptionPage() {
 
     const result = await res.json();
 
-    // 분석 페이지로 이동 (이미지 동봉)
     navigate("/analyze", {
       state: {
         ...(result?.data || {}),
