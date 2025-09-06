@@ -11,3 +11,112 @@
   box-sizing: border-box;
   overflow-y: auto;
 }
+
+.currentPet {
+  position: relative;
+  text-align: center;
+  margin-top: 45px;
+}
+
+.currentPetImg {
+  position: relative;
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+  z-index: 10;
+}
+
+.floor {
+  width: 160px;
+  height: 35px;
+  border-radius: 60%;
+  background: #a0bcef66;
+  position: absolute;
+  left: -3px;
+}
+
+.floor1 {
+  top: 100px;
+}
+.floor2 {
+  top: 120px;
+}
+.floor3 {
+  top: 110px;
+}
+
+.petName {
+  margin-top: 30px;
+  font-family: "Cafe24 Ssurround air";
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
+
+.petInfo {
+  margin-top: 5px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.detail {
+  font-family: "Cafe24 Ssurround air";
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+.petList {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.petCard {
+  min-width: 120px;
+  background: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.petCardImg {
+  width: 80px;
+  height: auto;
+  margin: 0 auto 8px;
+}
+
+.cardName {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.selectBtn {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #a0bcef;
+  color: white;
+  cursor: pointer;
+}
+
+.selectBtn:active {
+  transform: translateY(1px);
+}
