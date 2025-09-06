@@ -1,6 +1,8 @@
 import { api } from "./client";
 
-// 게시글 목록 조회
+/**
+ * 게시글 목록 조회
+ */
 export const getPosts = async ({
   keyword = "",
   sortBy = "latest",
@@ -18,7 +20,9 @@ export const getPosts = async ({
   }
 };
 
-// 내 게시글 목록 조회
+/**
+ * 내 게시글 목록 조회
+ */
 export const getMyPosts = async ({ keyword = "", page = 0, size = 10 }) => {
   try {
     const res = await api.get("/api/posts/my", {
@@ -31,7 +35,22 @@ export const getMyPosts = async ({ keyword = "", page = 0, size = 10 }) => {
   }
 };
 
-// 게시글 생성
+/**
+ * 게시글 상세 조회
+ */
+export const getPostDetail = async (postId) => {
+  try {
+    const res = await api.get(`/api/posts/${postId}`);
+    return res.data.data;
+  } catch (error) {
+    console.error("게시글 상세 조회 실패:", error);
+    throw error;
+  }
+};
+
+/**
+ * 게시글 생성
+ */
 export const createPost = async (formData) => {
   try {
     const res = await api.post("/api/posts", formData, {
@@ -40,16 +59,6 @@ export const createPost = async (formData) => {
     return res.data.data;
   } catch (error) {
     console.error("게시글 생성 실패:", error);
-    throw error;
-  }
-};
-// ✅ 게시글 상세 조회
-export const getPostDetail = async (postId) => {
-  try {
-    const res = await api.get(`/api/posts/${postId}`);
-    return res.data.data; // <- API 명세의 data 객체 반환
-  } catch (error) {
-    console.error("게시글 상세 조회 실패:", error);
     throw error;
   }
 };
