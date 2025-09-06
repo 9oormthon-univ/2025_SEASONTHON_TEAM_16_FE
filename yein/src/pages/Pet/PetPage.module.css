@@ -10,6 +10,8 @@
   background-color: #ffffff;
   box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .currentPet {
@@ -81,25 +83,61 @@
   display: flex;
   gap: 12px;
   margin-top: 45px;
+  height: 250px;
   overflow-x: auto;
+  overflow-y: visible;
   padding-bottom: 10px;
   width: 100%;
 }
 
 .petCard {
-  min-width: 120px;
-  background: #fdfdfd;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
+  position: relative;
+  top: 15px;
   flex-shrink: 0;
+  width: 190px;
+  height: 190px;
+  border: 2px solid #414a56;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: center;
+  background: #ffffff;
+  overflow: visible;
 }
 
+/* 이미지: 카드 안에서 비율 유지 */
 .petCardImg {
-  width: 80px;
+  width: auto;
   height: auto;
-  margin: 0 auto 8px;
+  max-width: 120px;
+  max-height: 120px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* 펫별 이미지 크기 */
+.img_puppy {
+  width: 130px;
+  height: 130px;
+}
+.img_cat {
+  width: 120px;
+  height: 120px;
+}
+.img_rabbit {
+  width: 150px;
+  height: 150px;
+}
+.img_bear {
+  width: 130px;
+  height: 130px;
+}
+.img_mouse {
+  width: 130px;
+  height: 130px;
 }
 
 .cardName {
@@ -108,16 +146,27 @@
 }
 
 .selectBtn {
-  width: 100%;
+  position: absolute;
+  top: -10px;
+  width: 134px;
   padding: 4px 8px;
-  font-size: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #a0bcef;
-  color: white;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 2px solid #414a56;
+  color: #000000;
   cursor: pointer;
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0.2px;
+  text-align: center;
 }
 
 .selectBtn:active {
   transform: translateY(1px);
+}
+
+.selectedBtn {
+  background: #fff5e3;
 }

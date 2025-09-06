@@ -1,47 +1,60 @@
 .container {
   max-width: 400px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
+  padding-top: 80px;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .main {
+  width: 100%;
   padding: 20px 22px 28px;
+  box-sizing: border-box;
+}
+
+.header_wrapper {
+  width: 100%;
+  padding: 0 25px;
 }
 
 .title {
+  font-family: "Cafe24SsurroundAir", sans-serif;
   font-size: 22px;
   font-weight: 700;
   margin: 4px 0 16px;
+  text-align: center;
 }
 
 .reco {
-  width: calc(100% - 40px);  /* 업로드 박스, 버튼과 동일한 여백 */
+  width: calc(100% - 40px);
   max-width: 350px;
   margin: 0 auto 16px;
   text-align: left;
 }
 
 .recoTitle {
+  font-family: "Cafe24SsurroundAir", sans-serif;
   font-size: 20px;
-  color: #000000;
+  color: #000;
   margin-bottom: 4px;
-  font-weight: 300px;
+  font-weight: 300;
 }
 
 .recoLabel {
+  font-family: "Cafe24SsurroundAir", sans-serif;
   font-size: 14px;
-  color: #000000;
+  color: #000;
   margin-bottom: 4px;
 }
 
 .recoSentence {
+  font-family: "Cafe24SsurroundAir", sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.5;
@@ -57,35 +70,37 @@
 
 .dots {
   display: flex;
-  gap: 10px;
-  justify-content: flex-end; /* 오른쪽 정렬 */
+  gap: 8px;
+  justify-content: flex-end;
   margin: 12px auto;
-  width: calc(100% - 40px);   /* 좌우 여백 통일 */
+  width: calc(100% - 40px);
   max-width: 350px;
 }
-
 .dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
   background: #dedede;
 }
-.dot.active { background: #d9c8ff; }
+.dot.active {
+  background: #d9c8ff;
+}
 
 .tip {
+  font-family: "Cafe24SsurroundAir", sans-serif;
   width: calc(100% - 40px);
   text-align: right;
   font-size: 10px;
-  color: #19191B;
+  color: #19191b;
   margin: 6px 2px 14px;
 }
 
-/* 업로드 박스 */
 .upload {
+  position: relative;
+  width: calc(100% - 40px);
+  max-width: 350px;
   aspect-ratio: 4 / 3;
-  width: calc(100% - 40px);  /* 양쪽 20px 여백 */
-  max-width: 350px;          /* 너무 커지지 않게 제한 (선택) */
-  margin: 0 auto;            /* 가운데 정렬 */
+  margin: 0 auto;
 
   border: 2px dashed #d4d1de;
   border-radius: 18px;
@@ -93,54 +108,30 @@
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-
-.preview {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;           /* 원본 비율 유지하며 박스 안에 맞춤 */
-  display: block;
-}
-
-.uploadIcon {
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-}
-.uploadIcon::before {
-  content: "🖼️";
-  font-style: normal;
-  opacity: 0.5;
-  font-size: 24px;
-}
-
-/* 완료 버튼: 하단 여백 확보 & 비활성 스타일 */
-.submit {
+.uploadLabel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  width: calc(100% - 40px);
-  height: 46px;
-  margin-top: 18px;
-  border: 0;
-  border-radius: 23px;
-  background: linear-gradient(180deg, #efc9db 0%, #e8c0d3 100%);
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.2px; 
 }
-
-.submit:disabled { opacity: .6; cursor: not-allowed;}
-.hiddenInput { display: none; }
-
-.uploadLabel { width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-start; }
 
 .uploadText {
   width: calc(100% - 40px);
-  font-size: 14px;
-  color: #777;
-  padding: 0 12px;
   text-align: center;
+  color: #777;
+  font-family: "Cafe24SsurroundAir", sans-serif;
+  font-size: 12px;
+}
+
+.hiddenInput {
+  display: none;
 }
 
 .dragging {
@@ -151,22 +142,28 @@
 .preview {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
 }
 
-.submit:disabled { opacity: 0.6; }
+.uploadIcon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.uploadIcon::before {
+  content: "🖼️";
+  opacity: 0.4;
+  font-size: 24px;
+}
 
-/* 헤더가 fixed라면 컨테이너 상단 패딩 확보 */
-.container { padding-top: 80px; }
-
-/* 래퍼: 업로드/버튼과 같은 여백 규칙 */
 .formRow {
-  width: calc(100% - 40px);   /* 좌우 20px 여백 */
+  width: calc(100% - 40px);
   max-width: 350px;
-  margin: 10px auto 14px;     /* 가운데 정렬 */
+  margin: 10px auto 14px;
 }
-
-/* 인풋 자체 */
 .input {
   width: 100%;
   height: 48px;
@@ -175,7 +172,31 @@
   border-radius: 14px;
   background: #fff;
   outline: none;
-
-  /* ⬅️ 이게 핵심: padding/border 포함해서 100%로 계산 */
   box-sizing: border-box;
+}
+
+/* 제출 버튼 */
+.submit {
+  cursor: pointer;
+  width: calc(100% - 40px);
+  max-width: 350px;
+  height: 46px;
+  margin: 18px auto 24px;
+  border: 0;
+  border-radius: 23px;
+  background: linear-gradient(180deg, #efc9db 0%, #e8c0d3 100%);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.submit:hover {
+  transform: translateY(-1px);
+}
+.submit:active {
+  transform: translateY(0);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

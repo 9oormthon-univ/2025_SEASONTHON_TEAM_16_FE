@@ -1,0 +1,130 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 45px;
+  margin-bottom: 100px;
+}
+
+/* 입력 필드 박스 */
+.fieldBox {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05) inset;
+}
+
+.fieldBoxContent {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px 15px 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05) inset;
+}
+
+.label {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+  margin-right: 5px;
+}
+
+/* 투명 input/textarea */
+.input,
+.textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: "Cafe24SsurroundAir";
+  resize: none;
+}
+
+.textarea {
+  min-height: 100px;
+  margin-top: 23px;
+  margin-bottom: 5px;
+}
+
+.input {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+}
+
+.fileInput {
+  font-size: 13px;
+  border: none;
+  margin-top: 10px;
+}
+
+.button {
+  position: fixed;
+  bottom: 100px;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 340px;
+
+  padding: 14px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #414a56;
+  color: #fff;
+  font-size: 16px;
+  font-family: "Cafe24Ssurround";
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.previewWrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.previewImg {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}

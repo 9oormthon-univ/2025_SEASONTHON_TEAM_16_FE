@@ -1,0 +1,108 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.pageTitle {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #414a56;
+}
+
+.postList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.postCard {
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 10px 0px #00000040 inset;
+  cursor: pointer;
+}
+
+.postTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 14px;
+  color: #414a56;
+}
+
+.bookmarkIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.author {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 10px;
+  margin: 6px 0;
+  color: #666;
+}
+
+.quote {
+  font-family: "Cafe24SsurroundAir";
+  font-size: 12px;
+  line-height: 18px;
+  color: #222;
+  margin: 10px 0;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 12px;
+  color: #414a56;
+}
+.subtitleCard {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  margin-top: 35px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 15px 20px 9px 20px;
+  box-shadow: 0px 2px 10px 0px #00000040 inset;
+  color: #414a56;
+}

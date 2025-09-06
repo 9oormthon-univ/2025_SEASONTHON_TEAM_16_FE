@@ -2,30 +2,53 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/common/Footer";
 import ProgressBar from "../../components/common/ProgressBar";
 import styles from "./ProfilePage.module.css";
-import { getMyProfile, getMyPet, logout, deleteAccount } from "../../api/user";
+import { getMyProfile, getMyPet, logout } from "../../api/user";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
   const [pet, setPet] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [profileRes, petRes] = await Promise.all([
-          getMyProfile(),
-          getMyPet(),
-        ]);
-        setProfile(profileRes.data);
-        setPet(petRes.data);
-      } catch (err) {
-        console.error("데이터 불러오기 실패:", err);
-      } finally {
-        setLoading(false);
+  // ProfilePage.jsx (발췌)
+useEffect(() => {
+  async function fetchData() {
+    try {
+      const [me, petRes] = await Promise.all([ getMyProfile(), getMyPet() ]);
+
+      // 프로필은 그대로
+      setProfile(me?.data ?? me);
+
+      // ✅ /api/pets/me 의 data를 화면용으로 정규화
+      const raw = petRes?.data ?? petRes;
+      const xp    = Number(raw?.currentXp);
+      const goal  = Number(raw?.xpToNextLevel);
+
+      const normalizedPet = {
+        level: Number(raw?.level ?? 1),
+        experience: xp,                            // 현재 XP
+        xpToNextLevel: goal,                       // 다음 레벨까지 총 필요 XP
+        remainingXp: Math.max(0, goal - xp),       // 남은 XP
+        experiencePercent: goal > 0
+          ? Math.min(100, Math.round((xp / goal) * 100))
+          : 0,
+        petType: raw?.petType ?? "DEFAULT",
+        evolutionStage: Number(raw?.evolutionStage ?? 0),
+      };
+
+      setPet(normalizedPet);
+    } catch (err) {
+      console.error("데이터 불러오기 실패:", err);
+      if (err?.response?.status === 401 || err?.response?.status === 403) {
+        window.location.replace("/login?error=unauthorized");
       }
+    } finally {
+      setLoading(false);
     }
-    fetchData();
-  }, []);
+  }
+  fetchData();
+}, []);
 
   const handleLogout = async () => {
     try {
@@ -38,16 +61,6 @@ const ProfilePage = () => {
     }
   };
 
-  const handleDeleteAccount = async () => {
-    if (!window.confirm("정말 탈퇴하시겠습니까?")) return;
-    try {
-      await deleteAccount();
-      localStorage.clear();
-      window.location.href = "/signup"; // 탈퇴 후 이동
-    } catch (err) {
-      console.error("회원 탈퇴 실패:", err);
-    }
-  };
 
   if (loading) return <div>로딩중...</div>;
   if (!profile || !pet) return <div>데이터 없음</div>;
@@ -58,13 +71,17 @@ const ProfilePage = () => {
       <section className={styles.profileSection}>
         <div className={styles.avatarWrap}>
           <div className={styles.avatar}>
-            <span className={styles.avatarIcon}>👤</span>
+            {profile?.profileImageUrl ? (
+              <img src={profile.profileImageUrl} alt="프로필" className={styles.profileImg}/>
+                ) : (
+                  <span className={styles.profileFallback}>👤</span>
+                )}
           </div>
           <button className={styles.editBtn} aria-label="프로필 사진 수정">
             ✎
           </button>
         </div>
-        <div className={styles.userName}>{profile.nickname}</div>
+        <div className={styles.userName}>{profile.name}</div>
         <div className={styles.levelInfo}>
           <span className={styles.levelTag}>Lv. {pet.level}</span>
           <span className={styles.xpTag}>XP: {pet.experience}</span>
@@ -85,25 +102,35 @@ const ProfilePage = () => {
       <section className={styles.statsSection}>
         <div className={styles.statRow}>
           <span>오늘 필사</span>
-          <span className={styles.statValue}>{profile.todayCopyCount}</span>
+          <span className={styles.statValue}>
+            {profile?.todayGalleries ?? 0}
+          </span>
         </div>
+      </section>
+      <section className={styles.statsSection}>
         <div className={styles.statRow}>
           <span>총 필사 수</span>
-          <span className={styles.statValue}>{profile.totalCopyCount}</span>
+          <span className={styles.statValue}>
+            {profile?.totalGalleries ?? 0}
+          </span>
         </div>
+      </section>
+      <section className={styles.statsSection}>
         <div className={styles.statRow}>
           <span>전체 필사 평균</span>
-          <span className={styles.statValue}>{profile.avgCopyCount}</span>
+          <span className={styles.statValue}>
+            {(profile?.averageHandwritingScore ?? 0).toFixed(1)}
+          </span>
         </div>
       </section>
 
       {/* 네비게이션 카드 */}
       <section className={styles.menuSection}>
         <div className={styles.menuGrid}>
-          <button className={styles.menuCard}>오늘 필사</button>
-          <button className={styles.menuCard}>스크랩한 글귀</button>
-          <button className={styles.menuCard}>내가 쓴 댓글</button>
-          <button className={styles.menuCard}>작성한 게시물</button>
+          <button className={styles.menuCard} onClick={() => navigate("/transcription")}>추천 글귀</button>
+          <button className={styles.menuCard} onClick={() => navigate("/")}>스크랩한 글귀</button>
+          <button className={styles.menuCard} onClick={() => navigate("/")}>내가 쓴 댓글</button>
+          <button className={styles.menuCard} onClick={() => navigate("/")}>작성한 게시물</button>
         </div>
       </section>
 
@@ -111,9 +138,6 @@ const ProfilePage = () => {
       <section className={styles.bottomActions}>
         <button className={styles.logoutBtn} onClick={handleLogout}>
           로그아웃
-        </button>
-        <button className={styles.quitBtn} onClick={handleDeleteAccount}>
-          회원 탈퇴
         </button>
       </section>
 

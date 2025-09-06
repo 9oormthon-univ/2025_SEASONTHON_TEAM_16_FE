@@ -1,10 +1,191 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./CommunityPage.module.css";
+import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
+import { getPosts, deletePost, toggleScrap } from "../../api/post";
 
 const CommunityPage = () => {
+  const [bestPosts, setBestPosts] = useState([]);
+  const [latestPosts, setLatestPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
+
+  const fetchPosts = async () => {
+    try {
+      const bestData = await getPosts({ sortBy: "view", page: 0, size: 3 });
+      setBestPosts(bestData.content || []);
+
+      const latestData = await getPosts({
+        sortBy: "latest",
+        page: 0,
+        size: 5,
+        keyword: keyword || "",
+      });
+      setLatestPosts(latestData.content || []);
+    } catch (err) {
+      console.error("게시글 불러오기 실패:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    await fetchPosts();
+  };
+
+  if (loading) return <p>불러오는 중...</p>;
+
   return (
-    <div>
-      CommunityPage
+    <div
+      className={styles.container}
+      style={{
+        backgroundImage: "url(/assets/images/bg_home.svg)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      <Header />
+      <main className={styles.mainContent}>
+        <h2 className={styles.pageTitle}>커뮤니티</h2>
+
+        {/* 검색창 */}
+        <form className={styles.searchBar} onSubmit={handleSearch}>
+          <img
+            src="/assets/icons/search.svg"
+            alt="검색"
+            className={styles.searchIcon}
+          />
+          <input
+            type="text"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+        </form>
+
+        {/* 주간 Best */}
+        <section className={styles.section}>
+          <ul className={styles.bestList}>
+            <div className={styles.subTitleWrapper}>
+              <h3 className={styles.subTitle}>주간 Best</h3>
+              <img
+                src="/assets/icons/double_arrow.svg"
+                alt="더보기"
+                className={styles.moreIcon}
+                onClick={() => navigate("/best-posts")}
+              />
+            </div>
+            {bestPosts.map((post, index) => (
+              <li key={post.id} className={styles.bestItem}>
+                <span className={styles.rank}>{index + 1}위</span>
+                <div className={styles.textBox}>
+                  <p className={styles.title}>{post.title}</p>
+                  <p className={styles.info}>
+                    {post.bookTitle} / {post.author}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* 최근 게시물 */}
+        <section className={styles.section}>
+          <h3 className={styles.subTitle}>최근 게시물</h3>
+          <ul className={styles.postList}>
+            {latestPosts.map((post) => (
+              <li
+                key={post.id}
+                className={styles.postCard}
+                onClick={() => navigate(`/post/${post.id}`)}
+              >
+                <div className={styles.postTop}>
+                  <span className={styles.recenttitle}>{post.title}</span>
+                  <img
+                    src={
+                      post.isScraped
+                        ? "/assets/icons/clicked_bookmark.svg"
+                        : "/assets/icons/bookmark.svg"
+                    }
+                    alt="스크랩"
+                    className={styles.bookmarkIcon}
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      try {
+                        await toggleScrap(post.id);
+                        setLatestPosts((prev) =>
+                          prev.map((p) =>
+                            p.id === post.id
+                              ? { ...p, isScraped: !p.isScraped }
+                              : p
+                          )
+                        );
+                      } catch (err) {
+                        alert("스크랩 실패");
+                      }
+                    }}
+                  />
+                </div>
+                <p className={styles.author}>
+                  {post.bookTitle} / {post.author}
+                </p>
+                <p className={styles.quote}>{post.quote}</p>
+                <div className={styles.mode}>
+                  <span
+                    className={styles.modebutton}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/community/edit/${post.id}`);
+                    }}
+                  >
+                    수정
+                  </span>
+                  <span
+                    className={styles.modebutton}
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      if (!window.confirm("정말 삭제하시겠습니까?")) return;
+                      try {
+                        await deletePost(post.id);
+                        setLatestPosts((prev) =>
+                          prev.filter((p) => p.id !== post.id)
+                        );
+                      } catch (err) {
+                        alert("삭제 실패");
+                      }
+                    }}
+                  >
+                    삭제
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* 버튼 영역 */}
+        <div className={styles.buttonContainer}>
+          <button
+            className={`${styles.button} ${styles.myPosts}`}
+            onClick={() => navigate("/community/myposts")}
+          >
+            내가 쓴 글
+          </button>
+          <button
+            className={`${styles.button} ${styles.createPost}`}
+            onClick={() => navigate("/community/write")}
+          >
+            글쓰기
+          </button>
+        </div>
+      </main>
       <Footer />
     </div>
   );

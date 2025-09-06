@@ -13,7 +13,6 @@ export default function Signup() {
       return;
     }
 
-    // state, nonce 생성 + 저장
     const state = genRandomString(32);
     const nonce = genRandomString(32);
     sessionStorage.setItem("kakao_oauth_state", state);
@@ -34,18 +33,20 @@ export default function Signup() {
   };
 
   return (
-    <div className={styles.signup}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>회원가입</h1>
-        <h2 className={styles.headline}>
-          필사의 첫걸음을
-          <br />
-          내딛어 볼까요?
-        </h2>
-        <p className={styles.sub}>로그인이 필요합니다</p>
+    <div className={styles.signup} style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}>
+        <div className={styles.title}>禮仁</div>
+        <div className={styles.headline}>
+          필사의 첫걸음을 내딛어 볼까요?
+        </div>
 
-        <div className={styles.divider}>
-          <span>간편 로그인</span>
+        <img className={styles.logo} src="/assets/Clip.png" />
+
+        <div className={styles.mentBlock}>
+          당신의 손끝에서 태어난 기록이
+          <br />
+          작은 펫의 성장이 되고,
+          <br />
+          당신의 하루를 더 단단하게 만들어줍니다.
         </div>
 
         <div className={styles.socials}>
@@ -61,6 +62,5 @@ export default function Signup() {
           )}
         </div>
       </div>
-    </div>
   );
 }

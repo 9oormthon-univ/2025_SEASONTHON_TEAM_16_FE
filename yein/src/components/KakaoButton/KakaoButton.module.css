@@ -1,30 +1,16 @@
-.kakaoButton {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 44px;
-  height: 44px;
+.kakao {
+  display: inline-flex;   
+  align-items: center;     
+  gap: 8px;                
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-size: 16px;
   cursor: pointer;
-
-  border-radius: 8px;
-  background: #fee500;
-  border: 1px solid #e6d600;
-
-  font-size: 14px;
-  font-weight: 600;
-  padding: 0 12px;
-  gap: 8px;
-
-  transition: background 0.2s ease;
-}
-
-.kakaoButton:hover {
-  background: #fdd835;
+  border: 2px solid  #414A56;
 }
 
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
 }
