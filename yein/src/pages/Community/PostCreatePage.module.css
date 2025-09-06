@@ -1,0 +1,67 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: "Cafe24Ssurround";
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* 입력 필드 */
+.input,
+.textarea,
+.fileInput {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: "Cafe24SsurroundAir";
+  box-sizing: border-box;
+  outline: none;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.fileInput {
+  border: none;
+  padding: 5px;
+  font-size: 13px;
+}
+
+/* 버튼 */
+.button {
+  width: 100%;
+  padding: 14px;
+  background: #404955;
+  color: #fff;
+  font-size: 16px;
+  font-family: "Cafe24Ssurround";
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: #2f3640;
+}

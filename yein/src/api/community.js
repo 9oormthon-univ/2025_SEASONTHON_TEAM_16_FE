@@ -22,3 +22,4 @@ export const getPostById = async (postId) => {
     const res = await api.get(`/api/posts/${postId}`);
     return res.data?.data ?? res.data;
 }
+
