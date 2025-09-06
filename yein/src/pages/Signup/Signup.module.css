@@ -1,32 +1,41 @@
 .signup {
-  min-height: 100vh;
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+  padding-top: 50px;
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  background: #f4f5f6;
-  padding: 24px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
 }
 
-.card {
-  width: 390px;
-  max-width: 100%;
-  background: #fff;
-  border-radius: 24px;
-  padding: 32px 24px 28px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+.logo {
+  padding: 50px;
+}
+
+.mentBlock {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 2.5;
+  padding-bottom: 40px;
 }
 
 .title {
   margin: 0 0 24px;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 500;
+  color: #414A56;
 }
 
 .headline {
   margin: 0 0 18px;
   line-height: 1.28;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 300;
   letter-spacing: -0.3px;
 }
 
