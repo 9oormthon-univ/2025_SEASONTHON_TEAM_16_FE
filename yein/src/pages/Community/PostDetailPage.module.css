@@ -1,0 +1,193 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+/* 작성자 */
+.authorBox {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  border: 1px solid #afb1b6;
+  background: #fff0f766;
+}
+.author {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  margin-left: 20px;
+}
+
+/* 게시글 카드 */
+.postCard {
+  border: 1px solid #afb1b6;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 29px;
+  margin-bottom: 18px;
+  background: #fff0f766;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  color: #414a56;
+}
+
+.scrapIcon {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-style: Light;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+}
+
+.info {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+.quote {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  color: #000000;
+}
+
+/* 좋아요 + 댓글 수 */
+.meta {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.metainfo {
+  display: flex;
+  align-items: center;
+  font-family: "Cafe24Ssurround";
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+}
+
+.meta img {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+/* 댓글 리스트 */
+.commentList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 70px 0;
+}
+
+.commentItem {
+  padding: 12px;
+  border-bottom: 1px solid #afb1b6;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.commentUser {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+}
+
+.commentContent {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-style: Light;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+}
+
+/* 댓글 입력창 */
+.commentInputBox {
+  position: fixed;
+  bottom: 60px; /* Footer 위 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  border-top: 1px solid #ddd;
+  background: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.commentInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 8px;
+}
+
+.commentButton {
+  padding: 8px 12px;
+  background: #414a56;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.mode {
+  display: flex;
+  gap: 7px;
+}
+
+.button {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 8px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #afb1b6;
+}
