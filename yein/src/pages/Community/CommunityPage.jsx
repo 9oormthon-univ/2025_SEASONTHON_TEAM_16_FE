@@ -107,16 +107,22 @@ const CommunityPage = () => {
           <ul className={styles.postList}>
             {latestPosts.map((post) => (
               <li key={post.id} className={styles.postCard}>
-                <h4 className={styles.title}>{post.title}</h4>
-                <img
-                  src="/assets/icons/bookmark.svg"
-                  alt="스크랩"
-                  className={styles.bookmarkIcon}
-                />
+                <div className={styles.postTop}>
+                  <span className={styles.recenttitle}>{post.title}</span>
+                  <img
+                    src="/assets/icons/bookmark.svg"
+                    alt="스크랩"
+                    className={styles.bookmarkIcon}
+                  />
+                </div>
                 <p className={styles.author}>
                   {post.bookTitle} / {post.author}
                 </p>
                 <p className={styles.quote}>{post.quote}</p>
+                <div className={styles.mode}>
+                  <span className={styles.modebutton}>수정</span>
+                  <span className={styles.modebutton}>삭제</span>
+                </div>
               </li>
             ))}
           </ul>
