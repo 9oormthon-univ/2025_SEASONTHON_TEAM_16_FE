@@ -6,7 +6,45 @@ import BestPostCard from "../../components/home/BestPostCard";
 import Header from "../../components/common/Header";
 import { getTodayRecommendation } from "../../api/recommend";
 import { getPosts } from "../../api/community";
+import { getPetStatus } from "../../api/pet"; // ✅ 펫 API 추가
 import { useNavigate } from "react-router-dom";
+
+// 서버 ↔ 클라 매핑 (PetPage랑 동일하게)
+const serverToClientPetType = {
+  DEFAULT: "PUPPY",
+  TYPE_1: "CAT",
+  TYPE_2: "RABBIT",
+  TYPE_3: "BEAR",
+  TYPE_4: "MOUSE",
+};
+
+const petImages = {
+  PUPPY: [
+    "/assets/images/puppy1.svg",
+    "/assets/images/puppy2.svg",
+    "/assets/images/puppy3.svg",
+  ],
+  CAT: [
+    "/assets/images/cat1.svg",
+    "/assets/images/cat2.svg",
+    "/assets/images/cat3.svg",
+  ],
+  RABBIT: [
+    "/assets/images/rabbit1.svg",
+    "/assets/images/rabbit2.svg",
+    "/assets/images/rabbit3.svg",
+  ],
+  BEAR: [
+    "/assets/images/bear1.svg",
+    "/assets/images/bear2.svg",
+    "/assets/images/bear3.svg",
+  ],
+  MOUSE: [
+    "/assets/images/mouse1.svg",
+    "/assets/images/mouse2.svg",
+    "/assets/images/mouse3.svg",
+  ],
+};
 
 const HomePage = () => {
   const [quote, setQuote] = useState("");
@@ -17,8 +55,12 @@ const HomePage = () => {
   const [bestLoading, setBestLoading] = useState(true);
   const [bestError, setBestError] = useState("");
 
+  const [pet, setPet] = useState(null); // ✅ 펫 상태
+  const [petLoading, setPetLoading] = useState(true);
+
   const navigate = useNavigate();
 
+  // 오늘의 문구
   useEffect(() => {
     (async () => {
       try {
@@ -33,11 +75,16 @@ const HomePage = () => {
     })();
   }, []);
 
+  // BEST 게시글
   useEffect(() => {
     (async () => {
       try {
         const data = await getPosts({ sortBy: "best", page: 0, size: 6 });
-        const items = Array.isArray(data?.content) ? data.content : Array.isArray(data) ? data : [];
+        const items = Array.isArray(data?.content)
+          ? data.content
+          : Array.isArray(data)
+          ? data
+          : [];
         setBestPosts(items);
       } catch (e) {
         console.error("BEST 게시글 불러오기 실패:", e);
@@ -47,6 +94,28 @@ const HomePage = () => {
       }
     })();
   }, []);
+
+  // ✅ 나의 펫 API
+  useEffect(() => {
+    (async () => {
+      try {
+        const petData = await getPetStatus();
+        setPet(petData);
+      } catch (e) {
+        console.error("펫 상태 불러오기 실패:", e);
+      } finally {
+        setPetLoading(false);
+      }
+    })();
+  }, []);
+
+  // 펫 이미지 계산
+  let petImg = "/assets/images/puppy1.svg";
+  if (pet) {
+    const clientType = serverToClientPetType[pet.petType] || "PUPPY";
+    const imgs = petImages[clientType] || [];
+    petImg = imgs[(pet.evolutionStage || 1) - 1] || petImg;
+  }
 
   return (
     <div
@@ -60,18 +129,39 @@ const HomePage = () => {
     >
       <Header />
 
+      {/* ✅ 나의 펫 섹션 */}
       <section className={styles.petSection}>
-        <div className={styles.pet_wrapper}>
-          <img className={styles.petCircle} src="/assets/images/bg_pet.svg" alt="배경" />
-          <img className={styles.petImg} src="/assets/images/puppy3.svg" alt="펫" />
-        </div>
-        <div className={styles.levelText}>나의 펫 (Lv. 4)</div>
-        <ProgressBar value={65} />
-        <button className={styles.primaryBtn} onClick={() => navigate("/pet")}>
-          마이펫 보러가기
-        </button>
+        {petLoading ? (
+          <p>펫 불러오는 중…</p>
+        ) : !pet ? (
+          <p>펫 정보 없음</p>
+        ) : (
+          <>
+            <div className={styles.pet_wrapper}>
+              <img
+                className={styles.petCircle}
+                src="/assets/images/bg_pet.svg"
+                alt="배경"
+              />
+              <img className={styles.petImg} src={petImg} alt="펫" />
+            </div>
+            <div className={styles.levelText}>
+              {pet.name} (Lv. {pet.level})
+            </div>
+            <ProgressBar
+              value={Math.floor((pet.currentXp / pet.xpToNextLevel) * 100)}
+            />
+            <button
+              className={styles.primaryBtn}
+              onClick={() => navigate("/pet")}
+            >
+              마이펫 보러가기
+            </button>
+          </>
+        )}
       </section>
 
+      {/* 오늘의 문구 */}
       <section className={styles.quoteSection}>
         <div className={styles.sectionLabel}>오늘의 문구 추천</div>
         {loading ? (
@@ -89,6 +179,7 @@ const HomePage = () => {
         </button>
       </section>
 
+      {/* BEST 필사 */}
       <section className={styles.bestSection}>
         <div className={styles.sectionLabel}>BEST 필사</div>
 
@@ -111,7 +202,7 @@ const HomePage = () => {
                 thumbnail={post.thumbnailUrl}
                 author={post.author?.nickname}
                 likes={post.likes}
-                onClick={() => navigate(`/posts/${post.id || post.postId}`)}   // ✅ 상세로 이동
+                onClick={() => navigate(`/posts/${post.id || post.postId}`)}
               />
             ))}
           </div>
