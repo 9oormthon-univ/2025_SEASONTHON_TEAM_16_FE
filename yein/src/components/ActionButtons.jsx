@@ -29,7 +29,7 @@ export default function ActionButtons({ onRetry, onComplete }) {
       {showConfirm && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
-            <p className={styles.retry}>재도전하시겠습니까?</p><br />
+            <p className={styles.retryAsk}>재도전하시겠습니까?</p><br />
             <p className={styles.retryComment}>이전에 작성한 필사 기록은 저장됩니다. <br />새로운 필사로 다시 시도할 수 있어요.</p><br />
             <div className={styles.modalActions}>
               <button onClick={cancelRetry} className={styles.cancel}>
