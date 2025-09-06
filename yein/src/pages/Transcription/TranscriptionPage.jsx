@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/common/Footer";
 import Header from "../../components/common/Header";
-import MoodSelector from "../../components/MoodSelector";
+import MoodSelector from "../../components/Transcription/MoodSelector";
 import styles from "./Transcription.module.css";
 
 export default function TranscriptionPage() {
