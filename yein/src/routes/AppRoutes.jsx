@@ -20,8 +20,8 @@ import PostDetailPage from "../pages/Community/PostDetailPage";
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* 인증 관련 */}
-      <Route path="/" element={<Signup />} />
+      <Route path="/" element={<Intro />} />
+
       <Route path="/login" element={<Signup />} />
       <Route path="/login/success" element={<LoginSuccess />} />
       <Route path="/oidc-callback" element={<Redirection />} />
