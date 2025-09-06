@@ -1,0 +1,41 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.footerItem {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #414a56;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+.name {
+  font-family: "Pretendard Variable", sans-serif;
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 0.15px;
+  text-align: center;
+}
+
+.active {
+  color: #b3a8f1;
+}

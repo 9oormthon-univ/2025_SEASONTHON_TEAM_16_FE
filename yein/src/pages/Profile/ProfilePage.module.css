@@ -1,0 +1,150 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.avatarWrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 8px;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+  background: #f9fafb;
+}
+.avatarIcon {
+  opacity: 0.5;
+}
+.editBtn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(20%, 20%);
+  background: #eef2ff;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.userName {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 6px 0;
+}
+.levelInfo {
+  display: flex;
+  gap: 6px;
+}
+.levelTag,
+.xpTag {
+  background: #ede9fe;
+  color: #6d28d9;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.progressTrack {
+  margin-top: 8px;
+  width: 80%;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #a6b4ff, #e3a6ff);
+}
+
+.emailSection {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+.emailLabel {
+  color: #6b7280;
+}
+.emailValue {
+  font-weight: 500;
+}
+
+.statsSection {
+  margin-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px;
+  font-size: 14px;
+}
+.statValue {
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.menuSection {
+  margin-top: 16px;
+}
+.menuGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+}
+.menuCard {
+  padding: 24px 12px;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  background: #fff;
+}
+
+.bottomActions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-size: 13px;
+}
+.logoutBtn,
+.quitBtn {
+  background: none;
+  border: none;
+  color: #6b7280;
+}
+.logoutBtn:hover {
+  color: #ef4444;
+}
+.quitBtn:hover {
+  color: #7c3aed;
+}
+
+.footerSpacer {
+  height: 86px;
+}

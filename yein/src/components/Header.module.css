@@ -1,0 +1,103 @@
+.header {
+  display: flex;
+  justify-content: center;   
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 10;
+}
+
+.headerInner {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%;
+  max-width: 400px; 
+  padding: 0 5vw; 
+  box-sizing: border-box;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #A0BCEF;
+  margin-bottom: 4px;
+}
+
+.slogan {
+  font-size: 12px;
+  color: #000000;
+}
+
+.profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileFallback {
+  font-size: 18px;
+  color: #666;
+}
+
+/* 상위 래퍼 */
+.reco {
+  width: calc(100% - 40px);  /* 업로드 박스와 동일한 좌우 여백 */
+  max-width: 350px;
+  margin: 0 auto 20px;
+  text-align: left;
+}
+
+/* "오늘의 필사하기" 큰 타이틀 */
+.recoTitle {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 8px;
+  color: #000000;
+}
+
+/* "오늘의 추천문구" 라벨 */
+.recoLabel {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+/* 추천 문구 본문 */
+.recoSentence {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #000000;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  margin-bottom: 6px;
+}
+
+/* 언더라인 */
+.recoUnderline {
+  width: 100%;
+  height: 2px;
+  background: #222;   /* 진한 라인 */
+  border-radius: 2px;
+}
