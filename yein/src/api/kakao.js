@@ -31,34 +31,18 @@ export async function fetchKakaoIdToken(code, returnedState) {
   if (!idToken) throw new Error("id_token 없음 (scope=openid 확인 필요)");
   return idToken;
 }
+
 export async function loginWithIdToken(idToken) {
-  const LOGIN_ENDPOINT = `${API_BASE}/auth/login`;
+  const res = await fetch(`${API_BASE.replace(/\/$/,"")}/auth/kakao/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ idToken }), // 서버 사양에 따라 { id_token } 등 필드명 확인
+    credentials: "include", // 서버가 세션도 세팅한다면 유지, 아니면 제거해도 됨
+  });
 
-  const res = await axios.post(
-    LOGIN_ENDPOINT,
-    {},
-    {
-      headers: {
-        "Content-Type": "application/json",
-        id_token: idToken,
-      },
-      timeout: 15000,
-      withCredentials: false,
-    }
-  );
-
-  const data = res.data;
-
-  const accessToken = data.accessToken || data.data?.accessToken;
-  const refreshToken = data.refreshToken || data.data?.refreshToken;
-
-  if (accessToken && refreshToken) {
-    localStorage.setItem("accessToken", accessToken); // camelCase로 저장
-    localStorage.setItem("refreshToken", refreshToken); // camelCase로 저장
-    console.log("✅ 토큰 저장 완료:", { accessToken, refreshToken });
-  } else {
-    console.warn("⚠️ 로그인 응답에 토큰 없음:", data);
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`LOGIN HTTP ${res.status}: ${text}`);
   }
-
-  return data;
+  return res.json(); // { success, data:{ accessToken, refreshToken?, user } }
 }

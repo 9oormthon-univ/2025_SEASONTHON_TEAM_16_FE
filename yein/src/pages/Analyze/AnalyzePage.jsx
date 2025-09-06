@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Footer from "../../components/Footer";
+import Footer from "../../components/common/Footer";
 import Header from "../../components/Header";
 import styles from "./AnalyzePage.module.css";
 

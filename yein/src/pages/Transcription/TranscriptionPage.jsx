@@ -89,20 +89,23 @@ export default function TranscriptionPage() {
   }, []);
 
   // 제출
-  const handleSubmit = async () => {
+  // 제출
+const handleSubmit = async () => {
   try {
     if (!file) throw new Error("이미지 파일이 없습니다.");
     if (!title.trim()) throw new Error("제목을 입력해 주세요.");
 
-    // 1) 백엔드가 발급한 accessToken이어야 합니다
-    const token = localStorage.getItem("access_token");
+    // 1) 백엔드가 발급한 accessToken 필수
+    const token =
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
     if (!token) {
       alert("로그인이 필요합니다.");
       navigate("/login");
       return;
     }
 
-    // 2) formData 구성
+    // 2) FormData 구성 (image + data(JSON))
     const form = new FormData();
     form.append("image", file, file.name);
 
@@ -111,33 +114,40 @@ export default function TranscriptionPage() {
       moods, // ["calm","happy"] ...
       quote: rec?.replace(/[“”]/g, "") || null,
     };
-
-    // 서버가 multipart/form-data에서 JSON 파트를 기대하는 경우 권장
-    form.append("data", new Blob([JSON.stringify(payload)], { type: "application/json" }));
-    // (만약 서버가 문자열만 받는다면 아래로 교체)
+    // 서버 파서 호환이 가장 좋은 방식: JSON Blob
+    form.append(
+      "data",
+      new Blob([JSON.stringify(payload)], { type: "application/json" })
+    );
+    // (만약 서버가 문자열만 받는다면 아래 라인으로 대체)
     // form.append("data", JSON.stringify(payload));
 
-    // 3) 한 번만 fetch
-    const res = await fetch(`${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`, // 백엔드 accessToken
-      },
-      body: form,
-      // credentials: "include", // 쿠키 세션 인증이 아니라면 제거
-    });
+    // 3) 한 번만 fetch (Content-Type은 설정❌: 브라우저가 자동 세팅)
+    const res = await fetch(
+      `${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`, // 백엔드 accessToken
+          Accept: "application/json",
+        },
+        body: form,
+        // Bearer 토큰 방식이면 보통 필요 없음:
+        // credentials: "include",
+      }
+    );
 
     if (!res.ok) {
+      const text = await res.text().catch(() => "");
       if (res.status === 401 || res.status === 403) {
         alert("인증이 필요합니다. 다시 로그인해 주세요.");
       }
-      const text = await res.text().catch(() => "");
       throw new Error(`HTTP ${res.status}: ${text}`);
     }
 
     const result = await res.json();
 
-    // 분석 페이지로 이동 (이미지 동봉)
+    // 4) 분석 화면으로 이동 (이미지도 같이 전달)
     navigate("/analyze", {
       state: {
         ...(result?.data || {}),
@@ -149,6 +159,7 @@ export default function TranscriptionPage() {
     alert(e.message);
   }
 };
+
 
   return (
     <div className={styles.container} style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}>

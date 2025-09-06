@@ -47,7 +47,6 @@ export default function Redirection() {
 
         setMsg(body?.message || err?.message || "로그인 실패");
         setDebug({ API_BASE, REDIRECT_URI, status, serverBody: body ?? null });
-        setTimeout(() => nav("/login", { replace: true }), 1800);
       }
     })();
   }, [code, returnedState, nav]);
