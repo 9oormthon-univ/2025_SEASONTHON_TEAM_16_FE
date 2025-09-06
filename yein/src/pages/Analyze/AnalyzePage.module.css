@@ -10,7 +10,7 @@ body {
   padding-left: 20px;
   margin-bottom: 0px;
   font-family: 'Cafe24SsurroundAir', sans-serif;
-  align-self: flex-start; /* ✅ flex 컨테이너 안에서 왼쪽 끝 */
+  align-self: flex-start; 
 }
 
 .container {
@@ -29,10 +29,13 @@ body {
 }
 
 .scoresSection {
-  width: 100%;           /* 부모 컨테이너가 꽉 차도록 */
-  padding: 0 16px;       /* 원하는 좌우 여백만 지정 */
+  width: 100%;
+  max-width: 360px;         
+  margin: 10px auto 0;      
+  padding: 0 16px;           
   box-sizing: border-box;
 }
+
 
 .scoresTitle {
   font-family: 'Cafe24SsurroundAir', sans-serif;
@@ -42,8 +45,8 @@ body {
 }
 
 .label {
-  flex: 0 0 60px;       
-  text-align: right;
+  flex: 0 0 45px;       
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -71,7 +74,7 @@ body {
   max-width: 332px;
   max-height: 145px;     
   overflow-y: auto;      
-  padding: 12px;
+  padding: 42px;
   margin: 16px 0;
   margin-bottom: -5px;
   border-radius: 12px;
@@ -101,7 +104,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;         
+  width: 100%;
+  margin-left: 20px;         
   gap: 12px;
   margin: 0 0;
 }

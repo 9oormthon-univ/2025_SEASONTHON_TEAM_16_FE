@@ -5,7 +5,7 @@ import ProgressBar from "../../components/common/ProgressBar";
 import BestPostCard from "../../components/home/BestPostCard";
 import Header from "../../components/common/Header";
 import { getTodayRecommendation } from "../../api/recommend";
-import { getPosts } from "../../api/community";              // ✅ 추가
+import { getPosts } from "../../api/community";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -111,7 +111,7 @@ const HomePage = () => {
                 thumbnail={post.thumbnailUrl}
                 author={post.author?.nickname}
                 likes={post.likes}
-                onClick={() => navigate(`/posts/${post.id || post.postId}`)}
+                onClick={() => navigate(`/posts/${post.id || post.postId}`)}   // ✅ 상세로 이동
               />
             ))}
           </div>
