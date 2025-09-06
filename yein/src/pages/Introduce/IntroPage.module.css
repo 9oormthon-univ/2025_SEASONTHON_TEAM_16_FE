@@ -1,0 +1,197 @@
+.signup {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+  padding-top: 50px;
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  padding: 20px;
+  margin-bottom: -20px;
+}
+
+.mentBlock {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 2.5;
+  padding-bottom: 40px;
+}
+
+.title {
+  margin: 0 0 24px;
+  font-size: 40px;
+  font-weight: 500;
+  color: #414A56;
+}
+
+.headline {
+  margin: 0 0 18px;
+  line-height: 2.5;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+}
+
+.sub {
+  margin: 0 0 18px;
+  font-size: 12px;
+  color: #666;
+}
+
+.emailInput {
+  width: 100%;
+  padding: 14px 4px 10px;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+}
+
+.emailInput:focus {
+  border-bottom-color: #111;
+}
+
+.emailInput[aria-invalid="true"] {
+  border-bottom-color: #e11d48;
+}
+
+.primary {
+  width: 100%;
+  margin-top: 16px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.02s ease, opacity 0.2s ease;
+}
+
+.primary:hover {
+  transform: translateY(-1px);
+}
+
+.primary.disabled {
+  background: #eee;
+  color: #aaa;
+  border-color: #eee;
+  cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 12px;
+  margin: 22px 0 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #e5e7eb;
+}
+
+.socials {
+  display: grid;
+  gap: 12px;
+}
+
+.social {
+  height: 48px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 15px;
+  color: #111;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.social:hover {
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  justify-items: center;
+  margin-top: 24px;
+}
+
+.itemRight, .itemLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itemRight {
+  flex-direction: row;      
+}
+
+.itemLeft {
+  flex-direction: row-reverse;
+}
+
+.label {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.circle {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -10px;
+}
+
+.gray  { background: radial-gradient(circle, #9CA3AF 0%, rgba(255, 255, 255, 0) 75%); }
+.pink  { background: radial-gradient(circle, #EFC7D8 0%, rgba(255, 255, 255, 0) 75%); }
+.purple{ background: radial-gradient(circle, #D8D3F4 0%, rgba(255, 255, 255, 0) 75%); }
+.blue  { background: radial-gradient(circle, #A0BCEF 0%, rgba(255, 255, 255, 0) 75%); }
+
+.item span {
+  font-size: 14px;
+}
