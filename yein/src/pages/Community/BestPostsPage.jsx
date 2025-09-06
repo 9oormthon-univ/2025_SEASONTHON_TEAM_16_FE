@@ -3,10 +3,12 @@ import styles from "./BestPostsPage.module.css";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import { getPosts } from "../../api/post";
+import { useNavigate } from "react-router-dom";
 
 const BestPostsPage = () => {
   const [bestPosts, setBestPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -42,7 +44,11 @@ const BestPostsPage = () => {
         <p className={styles.subtitlCard}>주간 Best</p>
         <ul className={styles.postList}>
           {bestPosts.map((post, index) => (
-            <li key={post.id} className={styles.postCard}>
+            <li
+              key={post.id}
+              className={styles.postCard}
+              onClick={() => navigate(`/post/${post.id}`)} // ✅ 상세페이지 이동
+            >
               <span className={styles.rank}>{index + 1}위</span>
               <div className={styles.top_info}>
                 <p className={styles.title}>{post.title}</p>
