@@ -25,9 +25,9 @@
 
 .icon { font-size: 18px; color: white; }
 
-.calm  { background: radial-gradient(40% 40% at 50% 50%, #8EA7E8 0%, #9BB4FF 60%, #BFD0FF 100%); }
-.joy { background: radial-gradient(40% 40% at 50% 50%, #E7A9B9 0%, #F6B8C6 60%, #FFD0DF 100%); }
-.depressed   { background: radial-gradient(40% 40% at 50% 50%, #9AA1A9 0%, #B1B7BE 60%, #C8CDD3 100%); }
+.calm  { background: radial-gradient(40% 40% at 50% 50%, #A0BCEF 40%, #9CA3AF00 130%); }
+.joy { background: radial-gradient(40% 40% at 50% 50%, #EFC7D8 0%, #9CA3AF00 130%); }
+.depressed   { background: radial-gradient(40% 40% at 50% 50%, #9CA3AF 0%, #9CA3AF00 130%); }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
