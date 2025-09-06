@@ -14,6 +14,7 @@ import AnalyzePage from "../pages/Analyze/AnalyzePage";
 import DetailPage from "../pages/Gallery/DetailPage";
 import RankPage from "../pages/Gallery/RankPage";
 import Intro from "../pages/Introduce/IntroPage";
+import BestPostsPage from "../pages/Community/BestPostsPage";
 
 export default function AppRoutes() {
   return (
@@ -41,6 +42,7 @@ export default function AppRoutes() {
       <Route path="/community" element={<CommunityPage />} />
       <Route path="/community/myposts" element={<MyPostsPage />} />
       <Route path="/community/write" element={<PostCreatePage />} />
+      <Route path="/best-posts" element={<BestPostsPage />} />
 
       {/* 프로필 */}
       <Route path="/profile" element={<ProfilePage />} />

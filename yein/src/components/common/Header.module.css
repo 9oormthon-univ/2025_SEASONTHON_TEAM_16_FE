@@ -1,21 +1,18 @@
 .header {
+  width: 100%;
   display: flex;
-  justify-content: center;   
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  justify-content: center;
   height: 70px;
   z-index: 10;
 }
 
 .headerInner {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 400px; 
-  padding: 0 5vw; 
+  max-width: 400px;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -28,7 +25,7 @@
 .title {
   font-size: 18px;
   font-weight: 600;
-  color: #A0BCEF;
+  color: #a0bcef;
   margin-bottom: 4px;
 }
 
@@ -62,7 +59,7 @@
 
 /* 상위 래퍼 */
 .reco {
-  width: calc(100% - 40px);  /* 업로드 박스와 동일한 좌우 여백 */
+  width: calc(100% - 40px); /* 업로드 박스와 동일한 좌우 여백 */
   max-width: 350px;
   margin: 0 auto 20px;
   text-align: left;
@@ -98,6 +95,6 @@
 .recoUnderline {
   width: 100%;
   height: 2px;
-  background: #222;   /* 진한 라인 */
+  background: #222; /* 진한 라인 */
   border-radius: 2px;
 }
