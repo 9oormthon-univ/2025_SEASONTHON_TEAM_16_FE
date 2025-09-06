@@ -3,17 +3,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../components/common/Footer";
 import Header from "../../components/common/Header";
 import styles from "./AnalyzePage.module.css";
-import ActionButtons from "../../components/ActionButtons";
+import ActionButtons from "../../components/analyze/ActionButtons";
 
-function ScoreBar({ label, value, max = 100, color = "#9CA3AF" }) {
+function ScoreBar({ label, value, max = 25, color = "#9CA3AF" }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
 
   return (
     <div className={styles.scoreItem} role="group" aria-label={`${label} 점수`}>
-      {/* 라벨: 고정폭 + 오른쪽 정렬(정렬/간격 등 길이 달라도 정렬 유지) */}
       <span className={styles.label}>{label}</span>
 
-      {/* 바: 유동폭(가장 넓게 차지) */}
       <div className={styles.scale} aria-hidden>
         <div className={styles.barWrapper}>
           <div
@@ -21,13 +19,12 @@ function ScoreBar({ label, value, max = 100, color = "#9CA3AF" }) {
             style={{
               width: `${pct}%`,
               backgroundColor: color,
-              borderColor: color, // 필요 시 진행막대 테두리 색 동기화
+              borderColor: color, 
             }}
           />
         </div>
       </div>
 
-      {/* 값: 고정폭 + 오른쪽 정렬(탭 간격 같은 숫자 정렬에 유리) */}
       <span className={styles.value} aria-label={`${value}점`}>{value}</span>
     </div>
   );
@@ -76,8 +73,6 @@ export default function AnalyzePage() {
         />
       )}
 
-
-      {/* 점수 섹션 */}
       <div className={styles.scoresSection}>
         <div className={styles.totalScore}>
           <span className={styles.scoreLabel}>점수</span>
@@ -90,7 +85,6 @@ export default function AnalyzePage() {
         <ScoreBar label="길이"   value={data.lengthScore} color="#EFC7D8"/>
       </div>
 
-      {/* 스크롤 되는 분석 박스 */}
       <div className={styles.analysisBox}>
         <h4>AI 피드백</h4>
         <p>{data.feedback}</p>
