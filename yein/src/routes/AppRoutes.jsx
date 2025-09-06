@@ -11,6 +11,7 @@ import ProfilePage from "../pages/Profile/ProfilePage";
 import AnalyzePage from "../pages/Analyze/AnalyzePage";
 import DetailPage from "../pages/Gallery/DetailPage";
 import RankPage from "../pages/Gallery/RankPage";
+import Intro from "../pages/Introduce/IntroPage";
 
 export default function AppRoutes() {
   return (
@@ -29,6 +30,7 @@ export default function AppRoutes() {
       <Route path="/detail/:galleryId" element={<DetailPage />} />
       <Route path="/analyze" element={<AnalyzePage />} />
       <Route path="/rank" element={<RankPage />} />
+      <Route path="/intro" element={<Intro />} />
     </Routes>
   );
 }
