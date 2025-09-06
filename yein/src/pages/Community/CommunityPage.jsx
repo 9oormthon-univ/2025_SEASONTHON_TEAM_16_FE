@@ -133,13 +133,13 @@ const CommunityPage = () => {
         <div className={styles.buttonContainer}>
           <button
             className={`${styles.button} ${styles.myPosts}`}
-            onClick={() => navigate("/myposts")}
+            onClick={() => navigate("/community/myposts")}
           >
             내가 쓴 글
           </button>
           <button
             className={`${styles.button} ${styles.createPost}`}
-            onClick={() => navigate("/post/create")}
+            onClick={() => navigate("/community/write")}
           >
             글쓰기
           </button>
