@@ -1,0 +1,38 @@
+/* MoodSelector.module.css */
+.wrap {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;   /* 오른쪽 정렬 */
+  width: calc(100% - 40px);    /* 좌우 여백 통일 */
+  max-width: 350px;
+  margin: 12px auto 8px;
+}
+
+.btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: none;
+  background: #ddd;
+  box-shadow: 0 0 18px rgba(0,0,0,0.08) inset, 0 6px 18px rgba(0,0,0,0.08);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .2s ease, opacity .2s ease;
+  opacity: .9;
+}
+.btn:active { transform: scale(0.96); }
+.btn.selected { box-shadow: 0 0 0 2px rgba(0,0,0,0.15) inset, 0 8px 22px rgba(0,0,0,0.12); opacity: 1; }
+
+.icon { font-size: 18px; color: white; }
+
+/* 색상 톤 */
+.calm  { background: radial-gradient(40% 40% at 50% 50%, #8EA7E8 0%, #9BB4FF 60%, #BFD0FF 100%); }
+.joy { background: radial-gradient(40% 40% at 50% 50%, #E7A9B9 0%, #F6B8C6 60%, #FFD0DF 100%); }
+.depressed   { background: radial-gradient(40% 40% at 50% 50%, #9AA1A9 0%, #B1B7BE 60%, #C8CDD3 100%); }
+
+/* 스크린리더 전용 텍스트 */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
