@@ -94,7 +94,9 @@ export default function TranscriptionPage() {
       if (!file) throw new Error("이미지 파일이 없습니다.");
       if (!title.trim()) throw new Error("제목을 입력해 주세요.");
 
-      const token = localStorage.getItem("access_token"); // 서버가 토큰을 기대할 때만 필요
+      const token =
+       localStorage.getItem("access_token") ||
+       sessionStorage.getItem("access_token");
 
       const form = new FormData();
       form.append("image", file, file.name);
@@ -105,15 +107,22 @@ export default function TranscriptionPage() {
         quote: rec?.replace(/[“”]/g, "") || null // 선택
       };
 
-      form.append("data", new Blob([JSON.stringify(payload)], { type: "application/json" }));
+      form.append("data", JSON.stringify(payload));
 
       const res = await fetch(`${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`, {
         method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        headers: {
+         ...(token ? { Authorization: `Bearer ${token}` } : {}),
+         Accept: "application/json",
+       },
         body: form,
+        credentials: "include",
       });
 
       if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+         alert("인증이 필요합니다. 다시 로그인해 주세요.");
+        }
         const text = await res.text().catch(() => "");
         throw new Error(`HTTP ${res.status}: ${text}`);
       }
