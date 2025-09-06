@@ -16,6 +16,7 @@
 }
 
 .title {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
   font-size: 22px;
   font-weight: 700;
   margin: 4px 0 16px;
@@ -29,6 +30,7 @@
 }
 
 .recoTitle {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
   font-size: 20px;
   color: #000000;
   margin-bottom: 4px;
@@ -36,12 +38,14 @@
 }
 
 .recoLabel {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
   font-size: 14px;
   color: #000000;
   margin-bottom: 4px;
 }
 
 .recoSentence {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.5;
@@ -73,6 +77,7 @@
 .dot.active { background: #d9c8ff; }
 
 .tip {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
   width: calc(100% - 40px);
   text-align: right;
   font-size: 10px;
@@ -80,12 +85,13 @@
   margin: 6px 2px 14px;
 }
 
-/* 업로드 박스 */
 .upload {
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-size: 10px;
   aspect-ratio: 4 / 3;
-  width: calc(100% - 40px);  /* 양쪽 20px 여백 */
-  max-width: 350px;          /* 너무 커지지 않게 제한 (선택) */
-  margin: 0 auto;            /* 가운데 정렬 */
+  width: calc(100% - 40px);  
+  max-width: 350px;         
+  margin: 0 auto;      
 
   border: 2px dashed #d4d1de;
   border-radius: 18px;
@@ -141,6 +147,8 @@
   color: #777;
   padding: 0 12px;
   text-align: center;
+  font-family: 'Cafe24SsurroundAir', sans-serif;
+  font-size: 10px;
 }
 
 .dragging {
