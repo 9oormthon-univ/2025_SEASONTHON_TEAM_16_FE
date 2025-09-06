@@ -90,61 +90,65 @@ export default function TranscriptionPage() {
 
   // 제출
   const handleSubmit = async () => {
-    try {
-      if (!file) throw new Error("이미지 파일이 없습니다.");
-      if (!title.trim()) throw new Error("제목을 입력해 주세요.");
+  try {
+    if (!file) throw new Error("이미지 파일이 없습니다.");
+    if (!title.trim()) throw new Error("제목을 입력해 주세요.");
 
-      const token =
-       localStorage.getItem("access_token") ||
-       sessionStorage.getItem("access_token");
-
-      const form = new FormData();
-      form.append("image", file, file.name);
-
-      const payload = {
-        title: title.trim(),
-        moods,                                   // ["calm","happy"] …
-        quote: rec?.replace(/[“”]/g, "") || null // 선택
-      };
-
-      form.append("data", JSON.stringify(payload));
-
-      const res = await fetch(`${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`, {
-        method: "POST",
-        headers: {
-         ...(token ? { Authorization: `Bearer ${token}` } : {}),
-         Accept: "application/json",
-       },
-        body: form,
-        credentials: "include",
-      });
-
-      if (!res.ok) {
-        if (res.status === 401 || res.status === 403) {
-         alert("인증이 필요합니다. 다시 로그인해 주세요.");
-        }
-        const text = await res.text().catch(() => "");
-        throw new Error(`HTTP ${res.status}: ${text}`);
-      }
-
-      const result = await res.json();
-
-      // 이동 직전 로깅(이미지 전달값 포함)
-      console.log("[navigate -> /analyze] result.data:", result?.data);
-      console.log("[navigate -> /analyze] imageDataUrl:", imageDataUrl?.slice(0, 50));
-      console.log("[navigate -> /analyze] preview:", preview);
-
-      navigate("/analyze", {
-        state: {
-          ...result.data,                 // 점수 등 서버 데이터
-          image: imageDataUrl || preview, // dataURL 우선(안전), fallback: blob URL
-        },
-      });
-    } catch (e) {
-      console.error("제출 실패:", e);
-      alert(e.message);
+    // 1) 백엔드가 발급한 accessToken이어야 합니다
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+      return;
     }
-  };
+
+    // 2) formData 구성
+    const form = new FormData();
+    form.append("image", file, file.name);
+
+    const payload = {
+      title: title.trim(),
+      moods, // ["calm","happy"] ...
+      quote: rec?.replace(/[“”]/g, "") || null,
+    };
+
+    // 서버가 multipart/form-data에서 JSON 파트를 기대하는 경우 권장
+    form.append("data", new Blob([JSON.stringify(payload)], { type: "application/json" }));
+    // (만약 서버가 문자열만 받는다면 아래로 교체)
+    // form.append("data", JSON.stringify(payload));
+
+    // 3) 한 번만 fetch
+    const res = await fetch(`${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`, // 백엔드 accessToken
+      },
+      body: form,
+      // credentials: "include", // 쿠키 세션 인증이 아니라면 제거
+    });
+
+    if (!res.ok) {
+      if (res.status === 401 || res.status === 403) {
+        alert("인증이 필요합니다. 다시 로그인해 주세요.");
+      }
+      const text = await res.text().catch(() => "");
+      throw new Error(`HTTP ${res.status}: ${text}`);
+    }
+
+    const result = await res.json();
+
+    // 분석 페이지로 이동 (이미지 동봉)
+    navigate("/analyze", {
+      state: {
+        ...(result?.data || {}),
+        image: imageDataUrl || preview, // dataURL 우선
+      },
+    });
+  } catch (e) {
+    console.error("제출 실패:", e);
+    alert(e.message);
+  }
+};
 
   return (
     <div className={styles.container} style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}>
