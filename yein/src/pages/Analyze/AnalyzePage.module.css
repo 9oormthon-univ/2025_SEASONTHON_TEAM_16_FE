@@ -1,0 +1,56 @@
+.scoresSection {
+  margin: 12px auto 8px;
+  max-width: 420px;
+}
+
+.scoresTitle {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.scoreItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.label {
+  width: 64px;              /* 항목 라벨 너비 */
+  font-weight: 500;
+  color: #333;
+}
+
+.barWrapper {
+  flex: 1;
+  height: 12px;
+  background: #eee;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, #aab7ff, #6a8dff);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.value {
+  width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #333;
+}
+
+.analyzeImage {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
