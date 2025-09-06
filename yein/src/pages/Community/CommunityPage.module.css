@@ -14,6 +14,7 @@
 
 .mainContent {
   width: 100%;
+  margin-bottom: 100px;
 }
 
 .pageTitle {
@@ -92,7 +93,7 @@
 .postCard {
   position: relative;
   border-radius: 12px;
-  padding: 21px 24px;
+  padding: 15px 24px;
   margin-bottom: 20px;
   border: 1px solid #afb1b6;
 }
@@ -104,25 +105,9 @@
   color: #222;
 }
 
-.postCard p {
-  font-size: 14px;
-  margin: 0 0 10px;
-  color: #555;
-}
-
-.postCard span {
-  font-size: 12px;
-  color: #888;
-}
-
-.bookmarkIcon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 18px;
-  height: 18px;
-  opacity: 0.6;
-  cursor: pointer;
+.postTop {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* 버튼 영역 */
@@ -233,4 +218,45 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.recenttitle {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #414a56;
+  margin-bottom: 11px;
+  margin-top: 10px;
+}
+
+.author {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  margin-bottom: 5px;
+}
+
+.quote {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  color: #000000;
+  margin-bottom: 11px;
+}
+.mode {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modebutton {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 10px;
+  color: #414a56;
 }
