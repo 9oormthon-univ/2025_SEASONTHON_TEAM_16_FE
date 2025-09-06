@@ -13,7 +13,6 @@ export default function Signup() {
       return;
     }
 
-    // state, nonce 생성 + 저장
     const state = genRandomString(32);
     const nonce = genRandomString(32);
     sessionStorage.setItem("kakao_oauth_state", state);
