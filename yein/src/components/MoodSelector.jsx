@@ -9,15 +9,14 @@ const MOODS = [
 ];
 
 export default function MoodSelector({ initial = [], onChange }) {
-  // initial: string[]  예) ["calm","happy"]
   const [selected, setSelected] = useState(new Set(initial));
 
   const toggle = (k) => {
     const next = new Set(selected);
     if (next.has(k)) next.delete(k);
-    else next.add(k);                         // 원하는 경우 최대 갯수 제한도 가능
+    else next.add(k);                        
     setSelected(next);
-    onChange?.(Array.from(next));             // 배열로 부모에 전달
+    onChange?.(Array.from(next));        
   };
 
   return (
@@ -34,7 +33,6 @@ export default function MoodSelector({ initial = [], onChange }) {
             title={label}
           >
             <span className={styles.icon} aria-hidden>☺</span>
-            <span className="sr-only">{label}</span>
           </button>
         );
       })}

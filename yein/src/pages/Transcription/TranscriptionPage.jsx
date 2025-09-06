@@ -15,8 +15,8 @@ export default function TranscriptionPage() {
 
   // 이미지 관련 상태
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);         // blob: URL
-  const [imageDataUrl, setImageDataUrl] = useState(null); // data:
+  const [preview, setPreview] = useState(null);            // blob: URL
+  const [imageDataUrl, setImageDataUrl] = useState(null);  // data:
   const [isDragging, setIsDragging] = useState(false);
   const objectUrlRef = useRef(null);
 
@@ -28,6 +28,14 @@ export default function TranscriptionPage() {
     (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE) ||
     process.env.REACT_APP_API_BASE ||
     "https://yein.duckdns.org";
+
+  // ✅ 진입 가드: 토큰 없으면 로그인으로
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      navigate("/login?error=login_required", { replace: true });
+    }
+  }, [navigate]);
 
   // 파일 선택/드랍 시 미리보기 & dataURL 준비
   const setPreviewFromFile = (f) => {
@@ -65,9 +73,15 @@ export default function TranscriptionPage() {
     setPreviewFromFile(f);
   };
 
-  // 추천 문구
+  // ✅ 추천 문구 (인증 포함)
   useEffect(() => {
-    fetch("https://yein.duckdns.org/api/recommendations/today")
+    const token = localStorage.getItem("access_token") || "";
+    fetch("https://yein.duckdns.org/api/recommendations/today", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "omit",
+    })
       .then((res) => {
         if (!res.ok) throw new Error(`서버 오류: ${res.status}`);
         return res.json();
@@ -82,84 +96,67 @@ export default function TranscriptionPage() {
       })
       .finally(() => setLoading(false));
 
-    // 언마운트 시 blob URL 정리 (다음 업로드 대비)
+    // 언마운트 시 blob URL 정리
     return () => {
       if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
     };
   }, []);
 
-  // 제출
-  // 제출
-const handleSubmit = async () => {
-  try {
-    if (!file) throw new Error("이미지 파일이 없습니다.");
-    if (!title.trim()) throw new Error("제목을 입력해 주세요.");
+  // ✅ 제출 (access_token 사용으로 통일)
+  const handleSubmit = async () => {
+    try {
+      if (!file) throw new Error("이미지 파일이 없습니다.");
+      if (!title.trim()) throw new Error("제목을 입력해 주세요.");
 
-    // 1) 백엔드가 발급한 accessToken 필수
-    const token =
-      localStorage.getItem("access_token") ||
-      sessionStorage.getItem("access_token");
-    if (!token) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        alert("로그인이 필요합니다.");
+        navigate("/login");
+        return;
+      }
 
-    // 2) FormData 구성 (image + data(JSON))
-    const form = new FormData();
-    form.append("image", file, file.name);
+      const form = new FormData();
+      form.append("image", file, file.name);
 
-    const payload = {
-      title: title.trim(),
-      moods, // ["calm","happy"] ...
-      quote: rec?.replace(/[“”]/g, "") || null,
-    };
-    // 서버 파서 호환이 가장 좋은 방식: JSON Blob
-    form.append(
-      "data",
-      new Blob([JSON.stringify(payload)], { type: "application/json" })
-    );
-    // (만약 서버가 문자열만 받는다면 아래 라인으로 대체)
-    // form.append("data", JSON.stringify(payload));
+      const payload = {
+        title: title.trim(),
+        moods, // ["calm","happy"] ...
+        quote: rec?.replace(/[“”]/g, "") || null,
+      };
 
-    // 3) 한 번만 fetch (Content-Type은 설정❌: 브라우저가 자동 세팅)
-    const res = await fetch(
-      `${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`,
-      {
+      // 서버가 multipart에서 JSON 파트를 기대하는 경우
+      form.append("data", new Blob([JSON.stringify(payload)], { type: "application/json" }));
+      // (문자열만 받는다면) form.append("data", JSON.stringify(payload));
+
+      const res = await fetch(`${API_BASE.replace(/\/$/, "")}/api/handwriting/analyze`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`, // 백엔드 accessToken
-          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: form,
-        // Bearer 토큰 방식이면 보통 필요 없음:
-        // credentials: "include",
-      }
-    );
+      });
 
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      if (res.status === 401 || res.status === 403) {
-        alert("인증이 필요합니다. 다시 로그인해 주세요.");
+      if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+          alert("인증이 필요합니다. 다시 로그인해 주세요.");
+        }
+        const text = await res.text().catch(() => "");
+        throw new Error(`HTTP ${res.status}: ${text}`);
       }
-      throw new Error(`HTTP ${res.status}: ${text}`);
+
+      const result = await res.json();
+
+      navigate("/analyze", {
+        state: {
+          ...(result?.data || {}),
+          image: imageDataUrl || preview, // dataURL 우선
+        },
+      });
+    } catch (e) {
+      console.error("제출 실패:", e);
+      alert(e.message || "요청 실패");
     }
-
-    const result = await res.json();
-
-    // 4) 분석 화면으로 이동 (이미지도 같이 전달)
-    navigate("/analyze", {
-      state: {
-        ...(result?.data || {}),
-        image: imageDataUrl || preview, // dataURL 우선
-      },
-    });
-  } catch (e) {
-    console.error("제출 실패:", e);
-    alert(e.message);
-  }
-};
-
+  };
 
   return (
     <div className={styles.container} style={{ backgroundImage: "url(/assets/images/bg_home.svg)" }}>
