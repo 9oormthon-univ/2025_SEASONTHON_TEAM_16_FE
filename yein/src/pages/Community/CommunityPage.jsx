@@ -4,6 +4,7 @@ import styles from "./CommunityPage.module.css";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import { getPosts } from "../../api/post";
+import { deletePost, toggleLike } from "../../api/post";
 
 const CommunityPage = () => {
   const [bestPosts, setBestPosts] = useState([]);
@@ -111,9 +112,25 @@ const CommunityPage = () => {
                 <div className={styles.postTop}>
                   <span className={styles.recenttitle}>{post.title}</span>
                   <img
-                    src="/assets/icons/bookmark.svg"
+                    src={
+                      post.isLiked
+                        ? "/assets/icons/clicked_bookmark.svg"
+                        : "/assets/icons/bookmark.svg"
+                    }
                     alt="스크랩"
                     className={styles.bookmarkIcon}
+                    onClick={async () => {
+                      try {
+                        await toggleLike(post.id);
+                        setLatestPosts((prev) =>
+                          prev.map((p) =>
+                            p.id === post.id ? { ...p, isLiked: !p.isLiked } : p
+                          )
+                        );
+                      } catch (err) {
+                        alert("스크랩 실패");
+                      }
+                    }}
                   />
                 </div>
                 <p className={styles.author}>
@@ -121,8 +138,28 @@ const CommunityPage = () => {
                 </p>
                 <p className={styles.quote}>{post.quote}</p>
                 <div className={styles.mode}>
-                  <span className={styles.modebutton}>수정</span>
-                  <span className={styles.modebutton}>삭제</span>
+                  <span
+                    className={styles.modebutton}
+                    onClick={() => navigate(`/community/edit/${post.id}`)} // 수정 페이지로 이동
+                  >
+                    수정
+                  </span>
+                  <span
+                    className={styles.modebutton}
+                    onClick={async () => {
+                      if (!window.confirm("정말 삭제하시겠습니까?")) return;
+                      try {
+                        await deletePost(post.id);
+                        setLatestPosts((prev) =>
+                          prev.filter((p) => p.id !== post.id)
+                        );
+                      } catch (err) {
+                        alert("삭제 실패");
+                      }
+                    }}
+                  >
+                    삭제
+                  </span>
                 </div>
               </li>
             ))}
