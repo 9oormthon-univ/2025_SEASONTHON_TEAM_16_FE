@@ -3,7 +3,7 @@ import { api } from "./client";
 // 게시글 목록 조회
 export const getPosts = async ({
   keyword = "",
-  sortBy = "latest",
+  sortBy = "best",
   page = 0,
   size = 10,
 } = {}) => {
@@ -17,3 +17,9 @@ export const getPosts = async ({
     throw error;
   }
 };
+
+export const getPostById = async (postId) => {
+    const res = await api.get(`/api/posts/${postId}`);
+    return res.data?.data ?? res.data;
+}
+
