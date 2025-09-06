@@ -3,9 +3,8 @@ import { useLocation } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import styles from "./AnalyzePage.module.css";
-import bg from "../../assets/bg.png";
 
-function ScoreBar({ label, value, max = 100 }) {
+function ScoreBar({ label, value, max = 100, color = "#9CA3AF" }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
   return (
     <div className={styles.scoreItem} role="group" aria-label={`${label} 점수`}>
@@ -13,13 +12,18 @@ function ScoreBar({ label, value, max = 100 }) {
       <div className={styles.barWrapper} aria-hidden>
         <div
           className={styles.bar}
-          style={{ width: `${pct}%` }}
+          style={{
+            width: `${pct}%`,
+            backgroundColor: color,   // ⬅️ 막대 색상 반영
+            borderColor: color,       // ⬅️(선택) 막대 테두리 색상도 동일하게
+          }}
         />
       </div>
       <span className={styles.value} aria-label={`${value}점`}>{value}</span>
     </div>
   );
 }
+
 
 export default function AnalyzePage() {
   const { state } = useLocation();
@@ -51,6 +55,7 @@ export default function AnalyzePage() {
             maxWidth: 334,
             width: "100%",
             height: 185,
+            objectFit: "cover",
             display: "block",
             margin: "16px auto",
             border: "1px solid #ddd",
