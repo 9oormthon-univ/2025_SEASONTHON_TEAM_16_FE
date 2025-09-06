@@ -1,0 +1,84 @@
+.container {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.rankList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rankItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid #afb1b6;
+}
+
+.rankInfo {
+  display: flex;
+  gap: 8px;
+}
+
+.rankNumber {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18.5px;
+  letter-spacing: 0.15px;
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookTitle {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18.5px;
+  letter-spacing: 0.15px;
+}
+
+.date {
+  font-family: "Cafe24SsurroundAir";
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 18.5px;
+  letter-spacing: 0.15px;
+  margin-top: 3px;
+  margin-left: 6px;
+}
+
+.score {
+  font-family: "Cafe24Ssurround";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18.5px;
+  letter-spacing: 0.15px;
+}
