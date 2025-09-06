@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailPage.module.css";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import { getGalleryDetail } from "../../api/gallery";
+import { formatDate } from "../../utils/date";
 
 const DetailPage = () => {
   const { galleryId } = useParams();
   const [gallery, setGallery] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -43,9 +45,7 @@ const DetailPage = () => {
         {/* 제목 + 날짜 */}
         <div className={styles.postHeader}>
           <p className={styles.bookTitle}>{gallery.title}</p>
-          <p className={styles.date}>
-            {new Date(gallery.createdAt).toISOString().slice(0, 10)}
-          </p>
+          <p className={styles.date}>{formatDate(gallery.createdAt)}</p>
         </div>
 
         {/* 이미지 */}
@@ -57,9 +57,16 @@ const DetailPage = () => {
         <div className={styles.scoreBox}>
           <div className={styles.scoreHeader}>
             <span className={styles.info}>점수</span>
-            <span className={styles.info}>{gallery.totalScore}/100</span>
+            <span
+              className={styles.info}
+              onClick={() => navigate("/rank")}
+              style={{ cursor: "pointer" }}
+            >
+              {gallery.totalScore}/100
+            </span>
           </div>
 
+          {/* 정렬 */}
           <div className={styles.bar}>
             <span className={styles.score_info1}>정렬</span>
             <div className={styles.progressWrapper}>
@@ -71,6 +78,7 @@ const DetailPage = () => {
             <span className={styles.score_info2}>{gallery.alignmentScore}</span>
           </div>
 
+          {/* 간격 */}
           <div className={styles.bar}>
             <span className={styles.score_info1}>간격</span>
             <div className={styles.progressWrapper}>
@@ -82,6 +90,7 @@ const DetailPage = () => {
             <span className={styles.score_info2}>{gallery.spacingScore}</span>
           </div>
 
+          {/* 일관성 */}
           <div className={styles.bar}>
             <span className={styles.score_info1}>일관성</span>
             <div className={styles.progressWrapper}>
@@ -95,6 +104,7 @@ const DetailPage = () => {
             </span>
           </div>
 
+          {/* 길이 */}
           <div className={styles.bar}>
             <span className={styles.score_info1}>길이</span>
             <div className={styles.progressWrapper}>
@@ -107,7 +117,6 @@ const DetailPage = () => {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );

@@ -10,6 +10,7 @@ import LoginSuccess from "../pages/Login/LoginSuccess";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import AnalyzePage from "../pages/Analyze/AnalyzePage";
 import DetailPage from "../pages/Gallery/DetailPage";
+import RankPage from "../pages/Gallery/RankPage";
 
 export default function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ export default function AppRoutes() {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/detail/:galleryId" element={<DetailPage />} />
       <Route path="/analyze" element={<AnalyzePage />} />
+      <Route path="/rank" element={<RankPage />} />
     </Routes>
   );
 }
