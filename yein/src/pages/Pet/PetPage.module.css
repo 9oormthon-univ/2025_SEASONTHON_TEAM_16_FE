@@ -47,14 +47,15 @@
 
 .petName {
   margin-top: 30px;
-  font-family: "Cafe24 Ssurround air";
-  font-weight: 300;
+  font-family: "Cafe24SsurroundAir";
+  font-weight: bold;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0.2px;
 }
 
 .petInfo {
+  width: 176px;
   margin-top: 5px;
   font-size: 13px;
   line-height: 1.5;
@@ -68,7 +69,7 @@
 }
 
 .detail {
-  font-family: "Cafe24 Ssurround air";
+  font-family: "Cafe24SsurroundAir", sans-serif;
   font-weight: 300;
   font-size: 14px;
   line-height: 24px;
@@ -79,7 +80,7 @@
 .petList {
   display: flex;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 45px;
   overflow-x: auto;
   padding-bottom: 10px;
   width: 100%;
